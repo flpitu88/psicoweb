@@ -5,10 +5,13 @@
  */
 package flpitu88.web.backend.psicoweb.model;
 
+import flpitu88.web.backend.psicoweb.dtos.UsuarioDTO;
+import flpitu88.web.backend.psicoweb.utils.FormatterFecha;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -31,7 +34,8 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(Integer id, String dni, String nombre, String apellido, String mail, LocalDate fechaNacimiento, Boolean administrador) {
+    public Usuario(Integer id, String dni, String nombre, String apellido,
+            String mail, LocalDate fechaNacimiento, Boolean administrador) {
         this.id = id;
         this.dni = dni;
         this.nombre = nombre;
@@ -41,8 +45,18 @@ public class Usuario {
         this.administrador = administrador;
     }
 
+    public Usuario(UsuarioDTO bean) {
+        this.dni = bean.getDni();
+        this.nombre = bean.getNombre();
+        this.apellido = bean.getApellido();
+        this.mail = bean.getMail();
+        this.fechaNacimiento = FormatterFecha
+                .crearFechaDesdeString(bean.getFechaNacimiento());
+        this.administrador = bean.getAdministrador();
+    }
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public Integer getId() {
         return id;
@@ -88,7 +102,7 @@ public class Usuario {
     }
 
     @Column(name = "fechaNacimiento")
-    @org.hibernate.annotations.Type(type = "flpitu88.web.backend.psicoweb.config.LocalDateUserType")
+    @org.hibernate.annotations.Type(type = "flpitu88.web.backend.psicoweb.utils.LocalDateUserType")
     public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }

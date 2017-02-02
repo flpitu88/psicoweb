@@ -5,6 +5,7 @@
  */
 package flpitu88.web.backend.psicoweb.resources;
 
+import flpitu88.web.backend.psicoweb.dtos.UsuarioDTO;
 import flpitu88.web.backend.psicoweb.model.Usuario;
 import flpitu88.web.backend.psicoweb.serviceapis.UsuariosAPI;
 import java.util.List;
@@ -53,7 +54,8 @@ public class UsuariosResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void guardarUsuario(Usuario usuario) {
+    public void guardarUsuario(UsuarioDTO usuarioBean) {
+        Usuario usuario = new Usuario(usuarioBean);
         usuarioSrv.guardarUsuario(usuario);
     }
 
