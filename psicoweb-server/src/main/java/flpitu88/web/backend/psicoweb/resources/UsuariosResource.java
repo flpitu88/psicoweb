@@ -19,6 +19,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 /**
  *
@@ -53,6 +54,7 @@ public class UsuariosResource {
     }
 
     @POST
+    @CrossOrigin(origins = "http://localhost:8000")
     @Consumes(MediaType.APPLICATION_JSON)
     public void guardarUsuario(UsuarioDTO usuarioBean) {
         Usuario usuario = new Usuario(usuarioBean);
