@@ -1,5 +1,3 @@
-'use strict';
-
 app = angular.module('psicoweb', [
     'ngRoute',
     'ngResource',
@@ -9,11 +7,15 @@ app = angular.module('psicoweb', [
 app.config(function ($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: 'views/home.html',
-        controller: 'HomeCtrl'
+        controller: 'HomeController'
     })
             .when('/registro', {
                 templateUrl: 'views/registro.html',
                 controller: 'RegistroController'
+            })
+            .when('/home', {
+                templateUrl: 'views/home.html',
+                controller: 'HomeController'
             });
 });
 

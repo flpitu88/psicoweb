@@ -1,19 +1,17 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+
+<html lang="en" ng-app="psicoweb" class="no-js">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>PsicoWEB</title>       
-        <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
-        <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-        <link rel="stylesheet" href="app.css">
+        <link rel="stylesheet" href="assets/css/normalize.css">
+        <link rel="stylesheet" href="assets/css/main.css">
+        <link rel="stylesheet" href="assets/css/app.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+
+        <!--<script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>-->
         <style>
             .error {
                 border-color: red;
@@ -37,7 +35,7 @@
                     <li><a href="#">Sacar Turno</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#/registro"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a data-target="#registro" href="#/registro"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 </ul>
             </div>
@@ -45,14 +43,19 @@
 
         <div ng-view></div>    
 
-        <!-- In production use:
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-        -->
-        <script src="assets/libs/angular.js"></script>
-        <script src="assets/libs/angular-route.js"></script>
+
+        <!-- JQUERY -->
+        <script src="assets/libs/jquery-3.0.0.min.js" ></script> 
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <!-- Angular -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
+        <!-- Scripts -->
         <script src="assets/js/app.js"></script>
-        <script src="assets/components/version/version.js"></script>
-        <script src="assets/components/version/version-directive.js"></script>
-        <script src="assets/components/version/interpolate-filter.js"></script>
+
+        <script src="assets/js/controllers/HomeController.js"></script>
+        <script src="assets/js/controllers/RegistroController.js"></script>
     </body>
 </html>
