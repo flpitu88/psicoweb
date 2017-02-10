@@ -1,17 +1,22 @@
-<!DOCTYPE html>
-
-<html lang="en" ng-app="psicoweb" class="no-js">
+<html lang="en" ng-app="psicoweb">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>PsicoWEB</title>       
-        <link rel="stylesheet" href="assets/css/normalize.css">
-        <link rel="stylesheet" href="assets/css/main.css">
-        <link rel="stylesheet" href="assets/css/app.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-        <!--<script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>-->
+        <!--Bootstrap CSS-->
+        <!--<link rel="stylesheet" href="assets/css/bootstrap.min.css"/>-->
+
+        <!--CSS-->
+        <link rel="stylesheet" href="assets/css/normalize.css" />
+        <link rel="stylesheet" href="assets/css/main.css" />
+        <link rel="stylesheet" href="assets/css/app.css"/>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="assets/libs/modernizr-2.8.3.min.js"></script>
+        
         <style>
             .error {
                 border-color: red;
@@ -30,32 +35,42 @@
                     <a class="navbar-brand" href="#">PSICO-web</a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Inicio</a></li>
+                    <li class="active"><a href="#/home">Inicio</a></li>
                     <li><a href="#">Novedades</a></li>
                     <li><a href="#">Sacar Turno</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a data-target="#registro" href="#/registro"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="#/registro"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 </ul>
             </div>
         </nav>
 
-        <div ng-view></div>    
+        <div class="container">
+            <div ng-view></div>
+        </div>
 
+        <!-- In production use:
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+        -->
 
+        <script src="assets/libs/angular.js"></script>
+        
+        <!--JQuery-->
         <!-- JQUERY -->
         <script src="assets/libs/jquery-3.0.0.min.js" ></script> 
-
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
         <!-- Angular -->
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
+        <script src="assets/libs/angular-route.js" ></script>
+        <script src="assets/libs/angular-resource.js"></script>
 
         <!-- Scripts -->
         <script src="assets/js/app.js"></script>
-
+        <!--<script src="assets/libs/bootstrap.min.js"></script>-->
+        <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
         <script src="assets/js/controllers/HomeController.js"></script>
         <script src="assets/js/controllers/RegistroController.js"></script>
+
     </body>
 </html>

@@ -1,44 +1,43 @@
-app = angular.module('psicoweb', [
-    'ngRoute',
-    'ngResource',
-    'angular-md5'
-]);
+var app = angular.module('psicoweb', ['ngRoute', 'ngResource']);
 
 app.config(function ($routeProvider) {
+
     $routeProvider.when('/', {
         templateUrl: 'views/home.html',
         controller: 'HomeController'
     })
+
             .when('/registro', {
                 templateUrl: 'views/registro.html',
                 controller: 'RegistroController'
             })
+
             .when('/home', {
                 templateUrl: 'views/home.html',
                 controller: 'HomeController'
-            });
-});
+            })
 
-app.config(function ($httpProvider) {
-    $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded';
-    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+            .otherwise({
+                redirectTo: '/'
+            });
 });
 
 app.factory('RegistroFactory', ['$http', function ($http) {
 
-        var urlLogin = 'rest/usuarios';
+        var urlUsuarios = 'rest/usuarios';
         var RegistroFactory = {};
 
         RegistroFactory.registrar = function (usuario, paramSerializer) {
             console.log(paramSerializer(usuario));
             return $http({
-                url: urlLogin,
+                url: urlUsuarios,
                 method: 'POST',
                 data: paramSerializer(usuario),
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    'Content-Type': 'application/json'
                 }
             });
         };
+
         return RegistroFactory;
     }]);

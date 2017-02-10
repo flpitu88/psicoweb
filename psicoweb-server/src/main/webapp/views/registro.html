@@ -1,4 +1,4 @@
-<div class="container" ng-controller="RegistroController as registroCtrl">
+<div class="container">
     <!--Formulario de registro de datos-->
     <div class="panel panel-default panelRegistro">
         <div class="panel-heading"><h4>Registro de Usuario</h4></div>
@@ -67,7 +67,7 @@
                 </div>
                 <div class="btn-group-horizontal botonera">
                     <a href="index.html" class="btn btn-default">Cancelar</a>
-                    <button type="submit" class="btn btn-success" ng-click="registrarUsuario()" ng-disabled="!formRegistro.$valid">Registrar</button>
+                    <button type="submit" class="btn btn-success" ng-click="postearRegistro()" ng-disabled="!formRegistro.$valid">Registrar</button>
                 </div>
             </form>
         </div>            

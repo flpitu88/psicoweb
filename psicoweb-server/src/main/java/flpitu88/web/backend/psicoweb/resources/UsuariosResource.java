@@ -54,7 +54,6 @@ public class UsuariosResource {
     }
 
     @POST
-    @CrossOrigin(origins = "http://localhost:8000")
     @Consumes(MediaType.APPLICATION_JSON)
     public void guardarUsuario(UsuarioDTO usuarioBean) {
         Usuario usuario = new Usuario(usuarioBean);
