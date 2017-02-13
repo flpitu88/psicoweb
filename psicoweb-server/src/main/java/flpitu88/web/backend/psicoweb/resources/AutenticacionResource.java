@@ -35,18 +35,18 @@ public class AutenticacionResource {
     @POST
     @Produces("text/plain")
     @Consumes("application/x-www-form-urlencoded")
-    public String authenticateUser(@FormParam("username") String username,
+    public String authenticateUser(@FormParam("email") String email,
             @FormParam("password") String password) throws Exception {
 
         logger.log(Level.INFO,
                 "############## El usuario {0} solicita iniciar sesion ##############",
-                username);
+                email);
 
         // Authenticate the user using the credentials provided
-        autentUtilsSrv.authenticate(username, password);
+        autentUtilsSrv.authenticate(email, password);
 
         // Issue a token for the user
-        String token = autentUtilsSrv.issueToken(username);
+        String token = autentUtilsSrv.issueToken(email);
 
         // Return the token on the response
         return token;

@@ -22,8 +22,6 @@ public interface AutenticacionUtilsAPI {
     public void validateToken(String token) throws Exception;
 
     public void authenticate(String username, String password) throws Exception;
-    
-    public void authenticateAdmin(String username, String password) throws Exception;
 
     public String issueToken(String username);
 
@@ -34,9 +32,5 @@ public interface AutenticacionUtilsAPI {
             AlgorithmException;
 
     public Usuario getUsuarioByToken(Map<String, Object> tokenParams);
-
-    public String getUsernameByToken(String token) throws IllegalStateException, VerifyException,
-            IllegalArgumentException, NoSuchAlgorithmException, UnsupportedEncodingException,
-            InvalidKeyException, AlgorithmException;
 
 }

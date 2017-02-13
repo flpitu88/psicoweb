@@ -8,17 +8,14 @@ package flpitu88.web.backend.psicoweb.resources;
 import flpitu88.web.backend.psicoweb.dtos.UsuarioDTO;
 import flpitu88.web.backend.psicoweb.model.Usuario;
 import flpitu88.web.backend.psicoweb.serviceapis.UsuariosAPI;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import org.springframework.stereotype.Component;
 
 /**
@@ -37,12 +34,6 @@ public class UsuariosResource {
     @Inject
     public UsuariosResource(UsuariosAPI usuarioSrv) {
         this.usuarioSrv = usuarioSrv;
-    }
-
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Usuario> getUsuariosRegistrados() {
-        return usuarioSrv.getUsuarios();
     }
 
     @POST

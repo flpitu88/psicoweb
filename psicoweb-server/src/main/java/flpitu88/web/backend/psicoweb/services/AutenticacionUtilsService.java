@@ -20,10 +20,11 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,9 +40,6 @@ public class AutenticacionUtilsService implements AutenticacionUtilsAPI {
 
     @Autowired
     private UsuariosDAO usDao;
-
-    @Autowired
-    private Environment env;
 
     @Override
     public void validateToken(String token) throws Exception {
@@ -79,54 +77,50 @@ public class AutenticacionUtilsService implements AutenticacionUtilsAPI {
     }
 
     @Override
-    public void authenticate(String username, String password) throws Exception {
+    @Transactional(readOnly = true)
+    public void authenticate(String email, String password) throws Exception {
         // Authenticate against a database, LDAP, file or whatever
         // Throw an Exception if the credentials are invalid
-//        Usuario user = usDao.getUsuarioByUsername(username);
-//        
-//        if (user != null) {
-//            if(user.getBloqueado()){
-//                throw new RuntimeException("El Usuario esta Bloqueado contactarse con soporte@enviolibre.com.ar");
-//            }
-//            if (user.getCredencialMP() == null) {
-//                throw new NoAutorizadoMPException(env.getProperty("AUTH_URL") + username);
-//            }
-//            if (user.getClave().equals(password)) {
-//                // TODO SALIO OK, se valida la clave
-//            } else {
-//                throw new RuntimeException("Clave incorrecta del usuario " + username);
-//            }
-//        } else {
-//            throw new RuntimeException("No existe el usuario " + username);
-//        }
-//    }
-//
-//    @Override
-//    public String issueToken(String username) {
-//        // Issue a token (can be a random String persisted to a database or a JWT token)
-//        // The issued token must be associated to a user
-//        // Return the issued token
-//        try {
-//            // Encode a JWT with default algorithm
-//            HashMap<String, Object> payload = new HashMap<>();
-//
-//            long iat = System.currentTimeMillis();
-//            long expiracion = TimeUnit.MILLISECONDS.convert(30, TimeUnit.DAYS);
-//
-//            payload.put("name", username);
-//            payload.put("iat", new Long(iat));
-//            payload.put("exp", new Long(iat + expiracion));
-////            payload.put("state", new HashMap<>());
-//
-//            String token = Jwt.encode(payload, key);
-//
-//            return token;
-//
-//        } catch (Exception e) {
-//            logger.log(Level.SEVERE,
-//                    "No se ha podido generar el token para el usuario {0}", username);
-//        }
-//        return null;
+        Usuario user = usDao.getUsuarioByMail(email);
+
+        if (user != null) {
+
+            if (user.getPassword().equals(password)) {
+                // TODO SALIO OK, se valida la clave
+            } else {
+                throw new RuntimeException("Clave incorrecta del usuario " + email);
+            }
+        } else {
+            throw new RuntimeException("No existe el usuario " + email);
+        }
+    }
+
+    @Override
+    public String issueToken(String email) {
+        // Issue a token (can be a random String persisted to a database or a JWT token)
+        // The issued token must be associated to a user
+        // Return the issued token
+        try {
+            // Encode a JWT with default algorithm
+            HashMap<String, Object> payload = new HashMap<>();
+
+            long iat = System.currentTimeMillis();
+            long expiracion = TimeUnit.MILLISECONDS.convert(30, TimeUnit.DAYS);
+
+            payload.put("name", email);
+            payload.put("iat", new Long(iat));
+            payload.put("exp", new Long(iat + expiracion));
+//            payload.put("state", new HashMap<>());
+
+            String token = Jwt.encode(payload, key);
+
+            return token;
+
+        } catch (Exception e) {
+            logger.log(Level.SEVERE,
+                    "No se ha podido generar el token para el usuario {0}", email);
+        }
+        return null;
     }
 
     @Override
@@ -140,43 +134,8 @@ public class AutenticacionUtilsService implements AutenticacionUtilsAPI {
     @Override
     @Transactional(readOnly = true)
     public Usuario getUsuarioByToken(Map<String, Object> tokenParams) {
-//        String usuario = (String) tokenParams.get("name");
-//        return usDao.getUsuarioByUsername(usuario);
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public String getUsernameByToken(String token) throws IllegalStateException, VerifyException,
-            IllegalArgumentException, NoSuchAlgorithmException, UnsupportedEncodingException,
-            InvalidKeyException, AlgorithmException {
-        Map<String, Object> map = decodeToken(token);
-        return (String) map.get("name");
-    }
-
-    /**
-     *
-     * @param username
-     * @param password
-     * @throws Exception
-     */
-    @Override
-    public void authenticateAdmin(String username, String password) throws Exception {
-
-//        Administrador admin = admDao.getAdministradorByUsername(username);
-//        if (admin != null) {
-//            if (admin.getClave().equals(password)) {
-//                // TODO SALIO OK, se valida la clave
-//            } else {
-//                throw new RuntimeException("Clave incorrecta del usuario " + username);
-//            }
-//        } else {
-//            throw new RuntimeException("No existe el usuario " + username);
-//        }
-    }
-
-    @Override
-    public String issueToken(String username) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String email = (String) tokenParams.get("name");
+        return usDao.getUsuarioByMail(email);
     }
 
 }
