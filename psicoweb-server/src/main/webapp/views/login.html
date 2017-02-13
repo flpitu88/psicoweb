@@ -1,0 +1,15 @@
+<div class="container">
+    <form class="form-signin" name="formLogin">
+        <h2 class="form-signin-heading">Inicio de Sesión</h2>
+        <label for="email" class="sr-only">Correo Electrónico</label>
+        <input type="email" class="form-control" placeholder="Dir. de E-mail" ng-model="email" name="email" required autofocus>
+        <label for="password" class="sr-only">Contraseña</label>
+        <input type="password" class="form-control" placeholder="Contraseña" ng-model="password" name="clave" required>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" ng-click="autenticar()">Sign in</button>
+    </form>
+</div>

@@ -30,12 +30,13 @@ public class Usuario {
     private String mail;
     private LocalDate fechaNacimiento;
     private Boolean administrador;
+    private String password;
 
     public Usuario() {
     }
 
     public Usuario(Integer id, String dni, String nombre, String apellido,
-            String mail, LocalDate fechaNacimiento, Boolean administrador) {
+            String mail, LocalDate fechaNacimiento, Boolean administrador, String password) {
         this.id = id;
         this.dni = dni;
         this.nombre = nombre;
@@ -43,6 +44,7 @@ public class Usuario {
         this.mail = mail;
         this.fechaNacimiento = fechaNacimiento;
         this.administrador = administrador;
+        this.password = password;
     }
 
     public Usuario(UsuarioDTO bean) {
@@ -53,6 +55,7 @@ public class Usuario {
         this.fechaNacimiento = FormatterFecha
                 .crearFechaDesdeString(bean.getFechaNacimiento());
         this.administrador = bean.getAdministrador();
+        this.password = bean.getPassword();
     }
 
     @Id
@@ -118,6 +121,15 @@ public class Usuario {
 
     public void setAdministrador(Boolean administrador) {
         this.administrador = administrador;
+    }
+
+    @Column(name = "password")
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }

@@ -31,6 +31,7 @@ public class PsicowebServerApplication extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(flpitu88.web.backend.psicoweb.config.JacksonObjectMapperConfig.class);
+        resources.add(flpitu88.web.backend.psicoweb.resources.AutenticacionResource.class);
         resources.add(flpitu88.web.backend.psicoweb.resources.UsuariosResource.class);
     }
 

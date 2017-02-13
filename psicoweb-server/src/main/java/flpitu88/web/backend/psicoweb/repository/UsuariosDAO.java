@@ -20,4 +20,6 @@ public interface UsuariosDAO {
     
     public List<Usuario> getUsuarios();
     
+    public Usuario getUsuarioByMail(String email);
+    
 }

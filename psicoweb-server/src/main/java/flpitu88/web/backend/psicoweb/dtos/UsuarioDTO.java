@@ -18,6 +18,7 @@ public class UsuarioDTO implements Serializable {
     private String dni;
     private String nombre;
     private String apellido;
+    private String password;
     private String mail;
     private String fechaNacimiento;
     private Boolean administrador;
@@ -25,10 +26,12 @@ public class UsuarioDTO implements Serializable {
     public UsuarioDTO() {
     }
 
-    public UsuarioDTO(String dni, String nombre, String apellido, String mail, String fechaNacimiento, Boolean administrador) {
+    public UsuarioDTO(String dni, String nombre, String apellido, String password,
+            String mail, String fechaNacimiento, Boolean administrador) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.password = password;
         this.mail = mail;
         this.fechaNacimiento = fechaNacimiento;
         this.administrador = administrador;
@@ -90,6 +93,14 @@ public class UsuarioDTO implements Serializable {
 
     public void setAdministrador(Boolean administrador) {
         this.administrador = administrador;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }

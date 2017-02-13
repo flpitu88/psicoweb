@@ -1,6 +1,5 @@
-'use strict';
-
-app.controller('RegistroController', ['$scope', '$location', 'RegistroFactory', '$httpParamSerializerJQLike', function ($scope, $location, RegistroFactory, $httpParamSerializerJQLike) {
+app.controller('RegistroController', ['$scope', '$location', 'RegistroFactory',
+    'md5', '$httpParamSerializerJQLike', function ($scope, $location, RegistroFactory, md5, $httpParamSerializerJQLike) {
 
         $scope.postearRegistro = function () {
 
@@ -8,19 +7,17 @@ app.controller('RegistroController', ['$scope', '$location', 'RegistroFactory', 
                 nombre: $scope.nombre,
                 apellido: $scope.apellido,
                 dni: $scope.dni,
+                fechaNacimiento: $scope.fechaNacimiento,
                 email: $scope.email,
-                password: $scope.password
+                password: md5.createHash($scope.password || '')
             };
-
-            console.log('ENTRO A POSTEAR REGISTRO!!!');
 
             RegistroFactory.registrar(usuario, $httpParamSerializerJQLike)
                     .success(function (data) {
-                        console.log('salio bien');
+                        $location.path("/home");
                     })
                     .error(function (data) {
                         console.log(data);
-                        console.log('salio mal');
                     });
         };
 

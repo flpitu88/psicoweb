@@ -43,7 +43,11 @@ public class UsuariosDAODB implements UsuariosDAO {
         return sessionFactory.getCurrentSession()
                 .createQuery("from Usuario")
                 .list();
+    }
 
+    @Override
+    public Usuario getUsuarioByMail(String email) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

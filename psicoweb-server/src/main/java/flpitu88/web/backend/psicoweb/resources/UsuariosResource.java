@@ -9,17 +9,17 @@ import flpitu88.web.backend.psicoweb.dtos.UsuarioDTO;
 import flpitu88.web.backend.psicoweb.model.Usuario;
 import flpitu88.web.backend.psicoweb.serviceapis.UsuariosAPI;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 /**
  *
@@ -45,19 +45,25 @@ public class UsuariosResource {
         return usuarioSrv.getUsuarios();
     }
 
-    @GET
-    @Path("/{idUsuario}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Usuario getUsuarioPorId(@PathParam("idUsuario") String idUsuario) {
-        Integer idUser = Integer.parseInt(idUsuario);
-        return usuarioSrv.getUsuarioById(idUser);
-    }
-
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void guardarUsuario(UsuarioDTO usuarioBean) {
-        Usuario usuario = new Usuario(usuarioBean);
+    @Produces("text/plain")
+    @Consumes("application/x-www-form-urlencoded")
+    public void guardarUsuario(@FormParam("nombre") String nombre,
+            @FormParam("apellido") String apellido,
+            @FormParam("dni") String dni,
+            @FormParam("email") String email,
+            @FormParam("fechaNacimiento") String fechaNac,
+            @FormParam("password") String password) {
+
+        UsuarioDTO bean = new UsuarioDTO(dni, nombre, apellido,
+                password, email, fechaNac, Boolean.FALSE);
+
+        Usuario usuario = new Usuario(bean);
         usuarioSrv.guardarUsuario(usuario);
+
+        logger.log(Level.INFO,
+                "############## Se registra el nuevo usuario {0} {1} ##############",
+                new Object[]{nombre, apellido});
     }
 
 }
