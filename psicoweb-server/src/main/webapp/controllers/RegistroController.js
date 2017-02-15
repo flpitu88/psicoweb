@@ -13,11 +13,11 @@ app.controller('RegistroController', ['$scope', '$location', 'RegistroFactory',
             };
 
             RegistroFactory.registrar(usuario, $httpParamSerializerJQLike)
-                    .success(function (data) {
+                    .then(function (value) {
+                        console.log(value);
                         $location.path("/home");
-                    })
-                    .error(function (data) {
-                        console.log(data);
+                    }, function (reason) {
+                        console.log(reason);
                     });
         };
 

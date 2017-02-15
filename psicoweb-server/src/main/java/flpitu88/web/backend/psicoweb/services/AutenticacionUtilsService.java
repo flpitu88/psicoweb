@@ -23,6 +23,8 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ws.rs.InternalServerErrorException;
+import javax.ws.rs.NotAuthorizedException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -88,10 +90,10 @@ public class AutenticacionUtilsService implements AutenticacionUtilsAPI {
             if (user.getPassword().equals(password)) {
                 // TODO SALIO OK, se valida la clave
             } else {
-                throw new RuntimeException("Clave incorrecta del usuario " + email);
+                throw new NotAuthorizedException("Clave incorrecta del usuario " + email);
             }
         } else {
-            throw new RuntimeException("No existe el usuario " + email);
+            throw new InternalServerErrorException("No existe el usuario " + email);
         }
     }
 
