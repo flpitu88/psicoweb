@@ -46,8 +46,17 @@
                             <label for="fechaNacimiento">Fecha de Nacimiento:</label>
                         </div>
                         <div class="col-md-3">
-                            <input type="text" class="form-control" placeholder="dd/MM/YYYY" ng-model="fechaNacimiento" name="fechaNacimiento" required>
-                            <span ng-show="!formRegistro.$pristine && formRegistro.fechaNacimiento.$error.required">Este campo es obligatorio</span>
+                            <!--                            <input type="text" class="form-control" placeholder="dd/MM/YYYY" ng-model="fechaNacimiento" name="fechaNacimiento" required>
+                                                        <span ng-show="!formRegistro.$pristine && formRegistro.fechaNacimiento.$error.required">Este campo es obligatorio</span>-->
+
+                            
+                                <!--                                <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="fechaNacimiento" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                                                <span class="input-group-btn">
+                                                                    <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                                </span>-->
+                            <mydatepicker ng-model="fechaNacimiento" date-options="dateOptions" opened="opened"/>
+                            
+
                         </div>
                     </div>
                 </div>

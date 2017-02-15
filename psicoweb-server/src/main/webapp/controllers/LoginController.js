@@ -14,7 +14,9 @@ app.controller('LoginController', ['$scope', '$location',
                             'Content-Type': 'application/x-www-form-urlencoded',
                             'Accept': 'text/plain'}
                     })
-                    .then(function () {
+                    .then(function (response) {
+                        console.log(response);
+                        $auth.setToken(response.data);
                         $location.path("/home");
                     }).catch(function (response) {
                 console.log(response);

@@ -22,11 +22,18 @@ app.config(['$locationProvider', '$routeProvider', '$authProvider', function ($l
                     templateUrl: 'views/login.html',
                     controller: 'LoginController'
                 })
+                .when('/logout', {
+                    templateUrl: 'views/home.html',
+                    controller: 'HomeController'
+                })
 
                 .otherwise({redirectTo: '/home'});
 
         $authProvider.loginUrl = "psicoweb-server/rest/autenticacion";
         $authProvider.signupUrl = "psicoweb-server/rest/usuarios";
         $authProvider.tokenName = "token";
-        $authProvider.tokenPrefix = "pwt";
+//        $authProvider.tokenPrefix = "pwt";
+        $authProvider.tokenHeader = 'Authorization';
+        $authProvider.tokenType = 'Bearer';
+        $authProvider.storageType = 'localStorage';
     }]);

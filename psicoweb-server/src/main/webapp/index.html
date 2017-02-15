@@ -28,7 +28,7 @@
     </head>
     <body>
 
-        <nav class="navbar navbar-inverse">
+        <nav class="navbar navbar-inverse" ng-controller="NavbarController">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="#">PSICO-web</a>
@@ -38,9 +38,12 @@
                     <li><a href="#">Novedades</a></li>
                     <li><a href="#">Sacar Turno</a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#!/registro"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                    <li><a href="#!/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <ul class="nav navbar-nav navbar-right" ng-if="!estaAutenticado()">
+                    <li><a href="#!/registro"><span class="glyphicon glyphicon-user"></span>Registrar</a></li>
+                    <li><a href="#!/login"><span class="glyphicon glyphicon-log-in"></span>Iniciar Sesión</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" ng-if="estaAutenticado()">
+                    <li><a href="#!/logout"><span class="glyphicon glyphicon-log-in"></span>Cerrar Sesión</a></li>
                 </ul>
             </div>
         </nav>
@@ -69,8 +72,11 @@
         <script src="controllers/HomeController.js"></script>
         <script src="controllers/RegistroController.js"></script>
         <script src="controllers/LoginController.js"></script>
+        <script src="controllers/NavbarController.js"></script>
         <script src="components/version/version.js"></script>
         <script src="components/version/version-directive.js"></script>
         <script src="components/version/interpolate-filter.js"></script>
+
     </body>
+
 </html>

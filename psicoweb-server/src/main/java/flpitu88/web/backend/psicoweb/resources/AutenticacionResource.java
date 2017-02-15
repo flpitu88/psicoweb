@@ -48,6 +48,8 @@ public class AutenticacionResource {
         // Issue a token for the user
         String token = autentUtilsSrv.issueToken(email);
 
+        logger.log(Level.INFO, "--- Asigno el token: {0}", token);
+
         // Return the token on the response
         return token;
 
