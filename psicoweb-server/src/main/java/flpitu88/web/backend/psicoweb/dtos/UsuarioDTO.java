@@ -19,7 +19,7 @@ public class UsuarioDTO implements Serializable {
     private String nombre;
     private String apellido;
     private String password;
-    private String mail;
+    private String email;
     private String fechaNacimiento;
     private Boolean administrador;
 
@@ -27,12 +27,12 @@ public class UsuarioDTO implements Serializable {
     }
 
     public UsuarioDTO(String dni, String nombre, String apellido, String password,
-            String mail, String fechaNacimiento, Boolean administrador) {
+            String email, String fechaNacimiento, Boolean administrador) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
         this.password = password;
-        this.mail = mail;
+        this.email = email;
         this.fechaNacimiento = fechaNacimiento;
         this.administrador = administrador;
     }
@@ -41,7 +41,7 @@ public class UsuarioDTO implements Serializable {
         this.dni = user.getDni();
         this.nombre = user.getNombre();
         this.apellido = user.getApellido();
-        this.mail = user.getMail();
+        this.email = user.getMail();
         this.fechaNacimiento = FormatterFecha
                 .crearStringDesdeLocalDate(user.getFechaNacimiento());
         this.administrador = user.getAdministrador();
@@ -71,12 +71,12 @@ public class UsuarioDTO implements Serializable {
         this.apellido = apellido;
     }
 
-    public String getMail() {
-        return mail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getFechaNacimiento() {

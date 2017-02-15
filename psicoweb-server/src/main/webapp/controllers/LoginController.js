@@ -1,5 +1,5 @@
-app.controller('LoginController', ['$scope', '$location', 'LoginFactory',
-    'md5', '$httpParamSerializerJQLike', function ($scope, $location, LoginFactory, md5, $httpParamSerializerJQLike) {
+app.controller('LoginController', ['$scope', '$location',
+    'md5', '$httpParamSerializerJQLike', '$auth', function ($scope, $location, md5, $httpParamSerializerJQLike, $auth) {
 
         $scope.autenticar = function () {
 
@@ -8,13 +8,17 @@ app.controller('LoginController', ['$scope', '$location', 'LoginFactory',
                 password: md5.createHash($scope.password || '')
             };
 
-            LoginFactory.autenticar(credenciales, $httpParamSerializerJQLike)
-                    .then(function (value) {
-                        console.log(value);
+            $auth.login($.param(credenciales),
+                    {
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'Accept': 'text/plain'}
+                    })
+                    .then(function () {
                         $location.path("/home");
-                    }, function (reason) {
-                        console.log(reason);
-                    });
+                    }).catch(function (response) {
+                console.log(response);
+            });
         };
 
     }]);

@@ -38,23 +38,15 @@ public class UsuariosResource {
 
     @POST
     @Produces("text/plain")
-    @Consumes("application/x-www-form-urlencoded")
-    public void guardarUsuario(@FormParam("nombre") String nombre,
-            @FormParam("apellido") String apellido,
-            @FormParam("dni") String dni,
-            @FormParam("email") String email,
-            @FormParam("fechaNacimiento") String fechaNac,
-            @FormParam("password") String password) {
-
-        UsuarioDTO bean = new UsuarioDTO(dni, nombre, apellido,
-                password, email, fechaNac, Boolean.FALSE);
+    @Consumes("application/json")
+    public void guardarUsuario(UsuarioDTO bean) {
 
         Usuario usuario = new Usuario(bean);
         usuarioSrv.guardarUsuario(usuario);
 
         logger.log(Level.INFO,
                 "############## Se registra el nuevo usuario {0} {1} ##############",
-                new Object[]{nombre, apellido});
+                new Object[]{bean.getNombre(), bean.getApellido()});
     }
 
 }

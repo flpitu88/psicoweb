@@ -51,7 +51,7 @@ public class Usuario {
         this.dni = bean.getDni();
         this.nombre = bean.getNombre();
         this.apellido = bean.getApellido();
-        this.mail = bean.getMail();
+        this.mail = bean.getEmail();
         this.fechaNacimiento = FormatterFecha
                 .crearFechaDesdeString(bean.getFechaNacimiento());
         this.administrador = bean.getAdministrador();

@@ -1,5 +1,5 @@
-app.controller('RegistroController', ['$scope', '$location', 'RegistroFactory',
-    'md5', '$httpParamSerializerJQLike', function ($scope, $location, RegistroFactory, md5, $httpParamSerializerJQLike) {
+app.controller('RegistroController', ['$scope', '$location',
+    'md5', '$httpParamSerializerJQLike', '$auth', function ($scope, $location, md5, $httpParamSerializerJQLike, $auth) {
 
         $scope.postearRegistro = function () {
 
@@ -9,16 +9,22 @@ app.controller('RegistroController', ['$scope', '$location', 'RegistroFactory',
                 dni: $scope.dni,
                 fechaNacimiento: $scope.fechaNacimiento,
                 email: $scope.email,
-                password: md5.createHash($scope.password || '')
+                password: md5.createHash($scope.password || ''),
+                administrador: false
             };
 
-            RegistroFactory.registrar(usuario, $httpParamSerializerJQLike)
-                    .then(function (value) {
-                        console.log(value);
+            $auth.signup(usuario,
+                    {
+                        headers: {
+                            'Accept': 'text/plain',
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(function () {
                         $location.path("/home");
-                    }, function (reason) {
-                        console.log(reason);
-                    });
+                    }).catch(function (response) {
+                console.log(response);
+            });
         };
 
     }]);
