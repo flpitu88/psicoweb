@@ -39,11 +39,11 @@
                     <li><a href="#">Sacar Turno</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right" ng-if="!estaAutenticado()">
-                    <li><a href="#!/registro"><span class="glyphicon glyphicon-user"></span>Registrar</a></li>
-                    <li><a href="#!/login"><span class="glyphicon glyphicon-log-in"></span>Iniciar Sesión</a></li>
+                    <li><a href="#!/registro"><span class="glyphicon glyphicon-user"></span> Registrar</a></li>
+                    <li><a href="#!/login"><span class="glyphicon glyphicon-log-in"></span> Iniciar Sesión</a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right" ng-if="estaAutenticado()">
-                    <li><a href="#!/logout"><span class="glyphicon glyphicon-log-in"></span>Cerrar Sesión</a></li>
+                <ul class="nav navbar-nav navbar-right" ng-if="estaAutenticado()" ng-click="cerrarSesion()">
+                    <li><a href="#!/logout"><span class="glyphicon glyphicon-log-in"></span> Cerrar Sesión</a></li>
                 </ul>
             </div>
         </nav>

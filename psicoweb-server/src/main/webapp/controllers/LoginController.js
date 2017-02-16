@@ -15,11 +15,11 @@ app.controller('LoginController', ['$scope', '$location',
                             'Accept': 'text/plain'}
                     })
                     .then(function (response) {
-                        console.log(response);
                         $auth.setToken(response.data);
+                        console.log('El usuario ha iniciado sesion');
                         $location.path("/home");
                     }).catch(function (response) {
-                console.log(response);
+                console.log('No se ha podido iniciar sesion');
             });
         };
 

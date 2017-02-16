@@ -1,9 +1,17 @@
-app.controller('NavbarController', ['$scope', '$auth', function ($scope, $auth) {
+app.controller('NavbarController', ['$scope', '$auth', '$location', function ($scope, $auth, $location) {
 
         $scope.estaAutenticado = function () {
-            console.log('El token es: ' + $auth.getToken());
-            console.log('ENTRO A VER SI ESTA AUTENTICADO, y es: ' + $auth.isAuthenticated());
             return $auth.isAuthenticated();
+        };
+
+        $scope.cerrarSesion = function () {
+            $auth.logout()
+                    .then(function () {
+                        console.log('El usuario cerro sesión');
+                        $location.path("/home");
+                    }).catch(function () {
+                console.log('No se ha podido cerrar sesion');
+            });
         };
 
     }]);
