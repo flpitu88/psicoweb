@@ -33,4 +33,8 @@ public interface AutenticacionUtilsAPI {
 
     public Usuario getUsuarioByToken(Map<String, Object> tokenParams);
 
+    public String getEmailByToken(String token) throws IllegalStateException, VerifyException,
+            IllegalArgumentException, NoSuchAlgorithmException, UnsupportedEncodingException,
+            InvalidKeyException, AlgorithmException;
+
 }

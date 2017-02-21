@@ -69,6 +69,7 @@ public class Usuario {
         this.id = id;
     }
 
+    @Column(name = "dni")
     public String getDni() {
         return dni;
     }

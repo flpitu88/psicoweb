@@ -109,7 +109,7 @@ public class AutenticacionUtilsService implements AutenticacionUtilsAPI {
             long iat = System.currentTimeMillis();
             long expiracion = TimeUnit.MILLISECONDS.convert(30, TimeUnit.DAYS);
 
-            payload.put("name", email);
+            payload.put("email", email);
             payload.put("iat", new Long(iat));
             payload.put("exp", new Long(iat + expiracion));
 //            payload.put("state", new HashMap<>());
@@ -136,8 +136,16 @@ public class AutenticacionUtilsService implements AutenticacionUtilsAPI {
     @Override
     @Transactional(readOnly = true)
     public Usuario getUsuarioByToken(Map<String, Object> tokenParams) {
-        String email = (String) tokenParams.get("name");
+        String email = (String) tokenParams.get("email");
         return usDao.getUsuarioByMail(email);
+    }
+
+    @Override
+    public String getEmailByToken(String token) throws IllegalStateException, VerifyException,
+            IllegalArgumentException, NoSuchAlgorithmException, UnsupportedEncodingException,
+            InvalidKeyException, AlgorithmException {
+        Map<String, Object> map = decodeToken(token);
+        return (String) map.get("email");
     }
 
 }

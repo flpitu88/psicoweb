@@ -14,15 +14,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProveedorUsuarioRequest implements ProveedorUsuarioRequestFilter {
 
-    private String usuario;
+    private String emailUsuario;
 
     @Override
-    public String getNombreUsuario() {
-        return usuario;
+    public String getEmailUsuario() {
+        return emailUsuario;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setEmailUsuario(String emailUsuario) {
+        this.emailUsuario = emailUsuario;
     }
 
 }

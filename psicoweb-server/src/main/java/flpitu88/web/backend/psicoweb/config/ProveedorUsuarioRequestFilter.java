@@ -16,6 +16,6 @@ public interface ProveedorUsuarioRequestFilter {
      * 
      * @return 
      */
-    public String getNombreUsuario();
+    public String getEmailUsuario();
     
 }
