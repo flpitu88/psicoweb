@@ -30,6 +30,7 @@ public class PsicowebServerApplication extends Application {
      * out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(flpitu88.web.backend.psicoweb.config.AuthenticationAdminFilter.class);
         resources.add(flpitu88.web.backend.psicoweb.config.AuthenticationFilter.class);
         resources.add(flpitu88.web.backend.psicoweb.config.JacksonObjectMapperConfig.class);
         resources.add(flpitu88.web.backend.psicoweb.resources.AutenticacionResource.class);
