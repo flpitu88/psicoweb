@@ -27,6 +27,7 @@ public class LocalTimeUserType implements EnhancedUserType, Serializable {
     private static final int A_YEAR = 2000;
     private static final int A_MONTH = 1;
     private static final int A_DAY = 1;
+    private static final String zoneid = "America/Buenos_Aires";
 
     @Override
     public int[] sqlTypes() {
@@ -65,7 +66,7 @@ public class LocalTimeUserType implements EnhancedUserType, Serializable {
         }
         Date time = (Date) timestamp;
         Instant instant = Instant.ofEpochMilli(time.getTime());
-        return LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalTime();
+        return LocalDateTime.ofInstant(instant, ZoneId.of(zoneid)).toLocalTime();
     }
 
     @Override
@@ -76,7 +77,7 @@ public class LocalTimeUserType implements EnhancedUserType, Serializable {
         } else {
             LocalTime lt = ((LocalTime) value);
             Instant instant = lt.atDate(LocalDate.of(A_YEAR, A_MONTH, A_DAY)).
-                    atZone(ZoneId.systemDefault()).toInstant();
+                    atZone(ZoneId.of(zoneid)).toInstant();
             Date time = Date.from(instant);
             StandardBasicTypes.TIME.nullSafeSet(preparedStatement, time, index, session);
         }
