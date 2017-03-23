@@ -6,6 +6,7 @@
 package flpitu88.web.backend.psicoweb.utils;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -14,10 +15,10 @@ import java.time.format.DateTimeFormatter;
  */
 public class FormatterFecha {
 
-    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
 
     public static LocalDate crearFechaDesdeString(String horaString) {
-        return LocalDate.parse(horaString, formatter);
+        return LocalDateTime.parse(horaString, formatter).toLocalDate();
     }
 
     public static String crearStringDesdeLocalDate(LocalDate ld) {

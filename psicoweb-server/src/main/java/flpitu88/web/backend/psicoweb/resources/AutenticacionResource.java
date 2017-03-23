@@ -5,6 +5,7 @@
  */
 package flpitu88.web.backend.psicoweb.resources;
 
+import flpitu88.web.backend.psicoweb.dtos.AutenticacionDTO;
 import flpitu88.web.backend.psicoweb.serviceapis.AutenticacionUtilsAPI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +15,7 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 /**
  *
@@ -33,9 +35,9 @@ public class AutenticacionResource {
     }
 
     @POST
-    @Produces("text/plain")
+    @Produces(MediaType.APPLICATION_JSON)
     @Consumes("application/x-www-form-urlencoded")
-    public String authenticateUser(@FormParam("email") String email,
+    public AutenticacionDTO authenticateUser(@FormParam("email") String email,
             @FormParam("password") String password) throws Exception {
 
         logger.log(Level.INFO,
@@ -46,13 +48,12 @@ public class AutenticacionResource {
         autentUtilsSrv.authenticate(email, password);
 
         // Issue a token for the user
-        String token = autentUtilsSrv.issueToken(email);
+        AutenticacionDTO autenticacionDTO = autentUtilsSrv.issueToken(email);
 
-        logger.log(Level.INFO, "--- Asigno el token: {0}", token);
+        logger.log(Level.INFO, "--- Asigno el token: {0}", autenticacionDTO.getToken());
 
         // Return the token on the response
-        return token;
-
+        return autenticacionDTO;
     }
 
 }

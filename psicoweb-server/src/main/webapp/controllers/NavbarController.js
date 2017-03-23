@@ -4,6 +4,16 @@ app.controller('NavbarController', ['$scope', '$auth', '$location', function ($s
             return $auth.isAuthenticated();
         };
 
+        $scope.esAdministrador = function () {
+            if ($auth.administrador === undefined
+                    || $auth.administrador === null
+                    || $auth.administrador === false){
+                return false;
+            } else {
+                return true;
+            }
+        };
+
         $scope.cerrarSesion = function () {
             $auth.logout()
                     .then(function () {

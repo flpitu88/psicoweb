@@ -106,10 +106,10 @@ app.controller('RegistroController', ['$scope', '$location',
             var date = data.date,
                     mode = data.mode;
             if (mode === 'day') {
-                var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
+                var dayToCheck = new Date(date);
 
                 for (var i = 0; i < $scope.events.length; i++) {
-                    var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
+                    var currentDay = new Date($scope.events[i].date);
 
                     if (dayToCheck === currentDay) {
                         return $scope.events[i].status;

@@ -43,18 +43,28 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="#">PSICO-web</a>
                 </div>
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#!/home">Inicio</a></li>
-                    <li><a href="#">Novedades</a></li>
-                    <li><a href="#">Sacar Turno</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right" ng-if="!estaAutenticado()">
-                    <li><a href="#!/registro"><span class="glyphicon glyphicon-user"></span> Registrar</a></li>
-                    <li><a href="#!/login"><span class="glyphicon glyphicon-log-in"></span> Iniciar Sesión</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right" ng-if="estaAutenticado()" ng-click="cerrarSesion()">
-                    <li><a href="#!/logout"><span class="glyphicon glyphicon-log-in"></span> Cerrar Sesión</a></li>
-                </ul>
+                <div ng-if="!estaAutenticado()">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#!/home">Inicio</a></li>
+                        <li><a href="#">Novedades</a></li>
+                        <li><a href="#">Sacar Turno</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#!/registro"><span class="glyphicon glyphicon-user"></span> Registrar</a></li>
+                        <li><a href="#!/login"><span class="glyphicon glyphicon-log-in"></span> Iniciar Sesión</a></li>
+                    </ul>
+                </div>
+                <div ng-if="estaAutenticado()">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#!/home">Inicio</a></li>
+                        <li><a href="#">Novedades</a></li>
+                        <li><a href="#">Sacar Turno</a></li>
+                        <li ng-if="esAdministrador()"><a href="#">Estadistica</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right" ng-click="cerrarSesion()">
+                        <li><a href="#!/logout"><span class="glyphicon glyphicon-log-in"></span> Cerrar Sesión</a></li>
+                    </ul>
+                </div>
             </div>
         </nav>
 
@@ -74,6 +84,7 @@
         <script src="bower_components/angular-resource/angular-resource.js"></script>
         <script src="bower_components/angular-md5/angular-md5.js"></script>
 
+        <script src="bower_components/angular-i18n/angular-locale_es-ar.js"></script>
         <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
         <script src="bower_components/satellizer/dist/satellizer.js"></script>
         <script src="bower_components/jquery/dist/jquery.min.js"></script>

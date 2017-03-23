@@ -5,6 +5,7 @@
  */
 package flpitu88.web.backend.psicoweb.serviceapis;
 
+import flpitu88.web.backend.psicoweb.dtos.AutenticacionDTO;
 import flpitu88.web.backend.psicoweb.excepciones.AlgorithmException;
 import flpitu88.web.backend.psicoweb.excepciones.VerifyException;
 import flpitu88.web.backend.psicoweb.model.Usuario;
@@ -23,7 +24,7 @@ public interface AutenticacionUtilsAPI {
 
     public void authenticate(String username, String password) throws Exception;
 
-    public String issueToken(String username);
+    public AutenticacionDTO issueToken(String username);
 
     public Map<String, Object> decodeToken(String token)
             throws IllegalStateException, VerifyException,

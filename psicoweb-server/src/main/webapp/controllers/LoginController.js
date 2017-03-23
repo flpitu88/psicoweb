@@ -12,11 +12,14 @@ app.controller('LoginController', ['$scope', '$location',
                     {
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
-                            'Accept': 'text/plain'}
+                            'Accept': 'application/json'}
                     })
                     .then(function (response) {
-                        $auth.setToken(response.data);
+                        console.log('El token es: ' + response.data.token);
+                        $auth.setToken(response.data.token);
                         console.log('El usuario ha iniciado sesion');
+                        console.log('Administrador es: ' + response.data.administrador);
+                        $auth.administrador = response.data.administrador;
                         $location.path("/home");
                     }).catch(function (response) {
                 console.log('No se ha podido iniciar sesion');

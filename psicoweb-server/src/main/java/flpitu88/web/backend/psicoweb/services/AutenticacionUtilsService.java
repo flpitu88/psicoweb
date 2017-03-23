@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import flpitu88.web.backend.psicoweb.config.Algorithm;
 import flpitu88.web.backend.psicoweb.config.Jwt;
+import flpitu88.web.backend.psicoweb.dtos.AutenticacionDTO;
 import flpitu88.web.backend.psicoweb.excepciones.AlgorithmException;
 import flpitu88.web.backend.psicoweb.excepciones.VerifyException;
 import flpitu88.web.backend.psicoweb.model.Usuario;
@@ -98,7 +99,8 @@ public class AutenticacionUtilsService implements AutenticacionUtilsAPI {
     }
 
     @Override
-    public String issueToken(String email) {
+    @Transactional(readOnly = true)
+    public AutenticacionDTO issueToken(String email) {
         // Issue a token (can be a random String persisted to a database or a JWT token)
         // The issued token must be associated to a user
         // Return the issued token
@@ -116,7 +118,11 @@ public class AutenticacionUtilsService implements AutenticacionUtilsAPI {
 
             String token = Jwt.encode(payload, key);
 
-            return token;
+            Usuario user = usDao.getUsuarioByMail(email);
+
+            AutenticacionDTO autenticacionDTO = new AutenticacionDTO(token, user.getAdministrador());
+
+            return autenticacionDTO;
 
         } catch (Exception e) {
             logger.log(Level.SEVERE,
