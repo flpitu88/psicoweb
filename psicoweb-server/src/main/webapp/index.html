@@ -34,6 +34,12 @@
                 border-radius: 32px;
                 color: black;
             }
+            /* button recolor */
+            .nav-pills > li.active > a, .btn-primary {
+                background-color: #6C6C6C !important;
+                border-color: #6C6C6C !important;
+                border-radius: 25px; 
+            }
         </style>
     </head>
     <body background="images/light_grey.png">
@@ -46,8 +52,7 @@
                 <div ng-if="!estaAutenticado()">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#!/home">Inicio</a></li>
-                        <li><a href="#">Novedades</a></li>
-                        <li><a href="#">Sacar Turno</a></li>
+                        <li><a href="#!/novedades">Novedades</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#!/registro"><span class="glyphicon glyphicon-user"></span> Registrar</a></li>
@@ -57,7 +62,7 @@
                 <div ng-if="estaAutenticado()">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#!/home">Inicio</a></li>
-                        <li><a href="#">Novedades</a></li>
+                        <li><a href="#!/novedades">Novedades</a></li>
                         <li><a href="#">Sacar Turno</a></li>
                         <li ng-if="esAdministrador()"><a href="#">Estadistica</a></li>
                     </ul>
@@ -94,6 +99,7 @@
         <script src="controllers/RegistroController.js"></script>
         <script src="controllers/LoginController.js"></script>
         <script src="controllers/NavbarController.js"></script>
+        <script src="controllers/NovedadesController.js"></script>
         <script src="components/version/version.js"></script>
         <script src="components/version/version-directive.js"></script>
         <script src="components/version/interpolate-filter.js"></script>

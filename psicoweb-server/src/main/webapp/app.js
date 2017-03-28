@@ -26,11 +26,15 @@ app.config(['$locationProvider', '$routeProvider', '$authProvider', function ($l
                     templateUrl: 'views/home.html',
                     controller: 'HomeController'
                 })
+                .when('/novedades', {
+                    templateUrl: 'views/novedades.html',
+                    controller: 'NovedadesController'
+                })
 
                 .otherwise({redirectTo: '/home'});
 
-        $authProvider.loginUrl = "psicoweb-server-0.1/rest/autenticacion";
-        $authProvider.signupUrl = "psicoweb-server-0.1/rest/usuarios";
+        $authProvider.loginUrl = "psicoweb-server/rest/autenticacion";
+        $authProvider.signupUrl = "psicoweb-server/rest/usuarios";
         $authProvider.tokenName = "token";
 //        $authProvider.tokenPrefix = "pwt";
         $authProvider.tokenHeader = 'Authorization';
