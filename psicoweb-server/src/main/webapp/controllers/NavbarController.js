@@ -7,11 +7,15 @@ app.controller('NavbarController', ['$scope', '$auth', '$location', function ($s
         $scope.esAdministrador = function () {
             if ($auth.administrador === undefined
                     || $auth.administrador === null
-                    || $auth.administrador === false){
+                    || $auth.administrador === false) {
                 return false;
             } else {
                 return true;
             }
+        };
+
+        $scope.isActive = function (viewLocation) {
+            return viewLocation === $location.path();
         };
 
         $scope.cerrarSesion = function () {
