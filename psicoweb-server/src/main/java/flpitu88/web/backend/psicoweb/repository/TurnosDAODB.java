@@ -38,5 +38,4 @@ public class TurnosDAODB implements TurnosDAO {
                 .createQuery("from Turno")
                 .list();
     }
-
 }

@@ -21,8 +21,13 @@ public class FormatterFecha {
         return LocalDateTime.parse(horaString, formatter).toLocalDate();
     }
 
-    public static String crearStringDesdeLocalDate(LocalDate ld) {
+    public static String crearStringDesdeLocalDateISO(LocalDate ld) {
         return ld.format(formatter);
+    }
+    
+    public static String crearStringDesdeLocalDate(LocalDate ld){
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return ld.format(format);
     }
 
 }

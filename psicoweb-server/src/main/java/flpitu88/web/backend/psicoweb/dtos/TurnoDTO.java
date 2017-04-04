@@ -27,8 +27,8 @@ public class TurnoDTO {
     }
 
     public TurnoDTO(Turno t) {
-        this.dia = FormatterFecha.crearStringDesdeLocalDate(t.getDia());
-        this.hora = FormatterHora.crearStringDesdeLocalTime(t.getHorario());
+        this.dia = FormatterFecha.crearStringDesdeLocalDateISO(t.getDia());
+        this.hora = FormatterHora.crearStringDesdeLocalTimeISO(t.getHorario());
     }
 
     public String getDia() {

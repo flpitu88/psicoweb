@@ -23,8 +23,13 @@ public class FormatterHora {
         return LocalTime.parse(horaString, formatter);
     }
 
-    public static String crearStringDesdeLocalTime(LocalTime lt) {
+    public static String crearStringDesdeLocalTimeISO(LocalTime lt) {
         formatter.withZone(ZoneId.of(zoneId));
         return lt.format(formatter);
+    }
+    
+    public static String crearStringDesdeLocalTime(LocalTime ld){
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("HH:mm");
+        return ld.format(format);
     }
 }

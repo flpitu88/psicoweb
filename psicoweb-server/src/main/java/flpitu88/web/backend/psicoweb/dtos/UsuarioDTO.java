@@ -43,7 +43,7 @@ public class UsuarioDTO implements Serializable {
         this.apellido = user.getApellido();
         this.email = user.getMail();
         this.fechaNacimiento = FormatterFecha
-                .crearStringDesdeLocalDate(user.getFechaNacimiento());
+                .crearStringDesdeLocalDateISO(user.getFechaNacimiento());
         this.administrador = user.getAdministrador();
     }
 

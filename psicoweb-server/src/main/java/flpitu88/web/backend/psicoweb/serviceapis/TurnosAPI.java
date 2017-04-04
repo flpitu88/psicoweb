@@ -18,5 +18,7 @@ public interface TurnosAPI {
     public void registrarTurno(TurnoDTO tBean, String usuario);
 
     public List<Turno> getTurnos();
+    
+    public void generarTurnosDisponibles();
 
 }
