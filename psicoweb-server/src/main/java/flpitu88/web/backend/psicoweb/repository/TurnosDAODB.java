@@ -9,6 +9,7 @@ import flpitu88.web.backend.psicoweb.model.Turno;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -36,6 +37,14 @@ public class TurnosDAODB implements TurnosDAO {
     public List<Turno> getTurnos() {
         return sessionFactory.getCurrentSession()
                 .createQuery("from Turno")
+                .list();
+    }
+
+    @Override
+    public List<Turno> getTurnosDisponibles() {
+        return sessionFactory.getCurrentSession()
+                .createCriteria(Turno.class)
+                .add(Restrictions.isNull("usuario"))
                 .list();
     }
 }

@@ -63,7 +63,7 @@
                     <ul class="nav navbar-nav">
                         <li ng-class="{ active: isActive('/home')}"><a href="#!/home">Inicio</a></li>
                         <li ng-class="{ active: isActive('/novedades')}"><a href="#!/novedades">Novedades</a></li>
-                        <li><a href="#">Sacar Turno</a></li>
+                        <li ng-class="{ active: isActive('/novedades')}"><a href="#!/sacarTurno">Sacar Turno</a></li>
                         <li ng-if="esAdministrador()"><a href="#">Estadistica</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right" ng-click="cerrarSesion()">
@@ -100,6 +100,7 @@
         <script src="controllers/LoginController.js"></script>
         <script src="controllers/NavbarController.js"></script>
         <script src="controllers/NovedadesController.js"></script>
+        <script src="controllers/SacarTurnoController.js"></script>
         <script src="components/version/version.js"></script>
         <script src="components/version/version-directive.js"></script>
         <script src="components/version/interpolate-filter.js"></script>

@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -133,4 +134,8 @@ public class Usuario {
         this.password = password;
     }
 
+    @Transient
+    public String getNombreCompleto() {
+        return this.getNombre() + " " + this.getApellido();
+    }
 }

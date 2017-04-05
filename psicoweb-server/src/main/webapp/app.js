@@ -30,6 +30,10 @@ app.config(['$locationProvider', '$routeProvider', '$authProvider', function ($l
                     templateUrl: 'views/novedades.html',
                     controller: 'NovedadesController'
                 })
+                .when('/sacarTurno', {
+                    templateUrl: 'views/sacarTurno.html',
+                    controller: 'SacarTurnoController'
+                })
 
                 .otherwise({redirectTo: '/home'});
 

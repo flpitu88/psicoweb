@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class FormatterFecha {
 
-    private static DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+    private static DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
 
     public static LocalDate crearFechaDesdeString(String horaString) {
         return LocalDateTime.parse(horaString, formatter).toLocalDate();

@@ -18,4 +18,6 @@ public interface TurnosDAO {
     
     public List<Turno> getTurnos();
     
+    public List<Turno> getTurnosDisponibles();
+    
 }

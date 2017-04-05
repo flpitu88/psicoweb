@@ -17,18 +17,21 @@ public class TurnoDTO {
 
     private String dia;
     private String hora;
+    private String usuario;
 
     public TurnoDTO() {
     }
 
-    public TurnoDTO(String dia, String hora) {
+    public TurnoDTO(String dia, String hora, String usuario) {
         this.dia = dia;
         this.hora = hora;
+        this.usuario = usuario;
     }
 
     public TurnoDTO(Turno t) {
         this.dia = FormatterFecha.crearStringDesdeLocalDateISO(t.getDia());
         this.hora = FormatterHora.crearStringDesdeLocalTimeISO(t.getHorario());
+        this.usuario = (t.getUsuario() != null) ? t.getUsuario().getNombreCompleto() : "Disponible";
     }
 
     public String getDia() {
@@ -45,6 +48,14 @@ public class TurnoDTO {
 
     public void setHora(String hora) {
         this.hora = hora;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
 }

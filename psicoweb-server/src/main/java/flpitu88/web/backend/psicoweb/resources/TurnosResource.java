@@ -11,8 +11,12 @@ import flpitu88.web.backend.psicoweb.config.Secured;
 import flpitu88.web.backend.psicoweb.dtos.TurnoDTO;
 import flpitu88.web.backend.psicoweb.model.Turno;
 import flpitu88.web.backend.psicoweb.serviceapis.TurnosAPI;
+import flpitu88.web.backend.psicoweb.utils.FormatterFecha;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
@@ -72,6 +76,21 @@ public class TurnosResource {
             turnosBean.add(bean);
         });
         return turnosBean;
+    }
+
+    @GET
+    @Path("/dias/disponibles")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Secured
+    public Set<String> getTurnosDisponibles() {
+        logger.log(Level.INFO,
+                "------ Se solicita conocer la lista de dias con turnos disponibles ---------");
+        Set<String> diasTurnosDisponibles = new HashSet<>();
+        List<Turno> turnosDisponibles = turnosSrv.getTurnosDisponibles();
+        turnosDisponibles.stream().forEach(
+                t -> diasTurnosDisponibles
+                        .add(FormatterFecha.crearStringDesdeLocalDate(t.getDia())));
+        return diasTurnosDisponibles;
     }
 
     @PUT

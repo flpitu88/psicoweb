@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="panel panel-primary panel-turno">
+        <div class="panel-heading"><h4>Registro de Usuario</h4></div>
+        <div class="panel-body">
+            <form name="formTurno">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="dia">Seleccione un dia:</label>
+                        </div>
+                        <button ng-click="obtenerTurnosDisponibles()">CargarTurnos</button>
+                        <div>
+                            <!--                            <select ng-model="fechaElegida">
+                                                            <option ng-repeat="f in fechas" value="{{f.string}}">{{f.string}}</option>
+                                                        </select>-->
+                            <h1 ng-repeat="turno in turnos"> {{turno}} </h1>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,5 @@
 app.controller('LoginController', ['$scope', '$location',
-    'md5', '$httpParamSerializerJQLike', '$auth', function ($scope, $location, md5, $httpParamSerializerJQLike, $auth) {
+    'md5', '$auth', function ($scope, $location, md5, $auth) {
 
         $scope.autenticar = function () {
 

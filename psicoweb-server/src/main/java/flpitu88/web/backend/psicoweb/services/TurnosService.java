@@ -125,4 +125,10 @@ public class TurnosService implements TurnosAPI {
                 + FormatterHora.crearStringDesdeLocalTime(t.getHorario()));
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<Turno> getTurnosDisponibles() {
+        return turnosDAO.getTurnosDisponibles();
+    }
+
 }
