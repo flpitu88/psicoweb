@@ -7,6 +7,7 @@ package flpitu88.web.backend.psicoweb.serviceapis;
 
 import flpitu88.web.backend.psicoweb.dtos.TurnoDTO;
 import flpitu88.web.backend.psicoweb.model.Turno;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -17,10 +18,12 @@ public interface TurnosAPI {
 
     public void registrarTurno(TurnoDTO tBean, String usuario);
 
-    public List<Turno> getTurnos();
+    public List<Turno> getTurnosRegistrados();
 
-    public List<Turno> getTurnosDisponibles();
+    public List<Turno> getDiasConTurnosDisponibles();
 
     public void generarTurnosDisponibles();
+    
+    public List<Turno> getTurnosDisponiblesDelDia(LocalDate dia);
 
 }

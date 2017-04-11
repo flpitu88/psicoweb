@@ -1,23 +1,57 @@
-<div class="container">
-    <div class="panel panel-primary panel-turno">
-        <div class="panel-heading"><h4>Registro de Usuario</h4></div>
+<div class="container" ng-init="inicializarDatos()">
+    <div class="panel panel-primary panel-turnos">
+        <div class="panel-heading"><h4>Registro de Turno</h4></div>
         <div class="panel-body">
-            <form name="formTurno">
+            <form name="formTurno">                
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <label for="dia">Seleccione un dia:</label>
                         </div>
-                        <button ng-click="obtenerTurnosDisponibles()">CargarTurnos</button>
-                        <div>
-                            <!--                            <select ng-model="fechaElegida">
-                                                            <option ng-repeat="f in fechas" value="{{f.string}}">{{f.string}}</option>
-                                                        </select>-->
-                            <h1 ng-repeat="turno in turnos"> {{turno}} </h1>
+                        <div class="col-md-5">
+                            <div>
+                                <select ng-model="diaElegido">
+                                    <option ng-repeat="dia in dias" value="{{dia}}">{{dia}}</option>
+                                </select> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="dia">Seleccione un horario:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <div>
+                                <select ng-model="horaElegida">
+                                    <option ng-repeat="hora in horas" value="{{hora}}">{{hora}}</option>
+                                </select> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="hayDiaYHorarioSeleccionado()">
+                    <div class="row">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h6>Ingrese el motivo de su consulta:</h6>
+                            </div>
+                            <div class="panel-body">
+                                <div ng-repeat="motivo in motivos">
+                                    <h6><input type="radio" value={{motivo.id}} ng-model="motivo.id" ng-change="radioChanged({{motivo.id}})"/> {{motivo.motivo}}</h6>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </form>
+        </div>
+        <div class="panel panel-primary panel-footer">
+            <div class="btn-group-horizontal botonera pull-right">
+                <a href="index.html" class="btn btn-default">Cancelar</a>
+                <button type="submit" class="btn btn-success" ng-click="registrarTurno()" ng-disabled="isCompleto()">Registrar</button>
+            </div>
         </div>
     </div>
 </div>

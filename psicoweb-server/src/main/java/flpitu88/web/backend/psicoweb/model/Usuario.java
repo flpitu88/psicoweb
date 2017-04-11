@@ -54,7 +54,7 @@ public class Usuario {
         this.apellido = bean.getApellido();
         this.mail = bean.getEmail();
         this.fechaNacimiento = FormatterFecha
-                .crearFechaDesdeString(bean.getFechaNacimiento());
+                .crearFechaNacimientoDesdeString(bean.getFechaNacimiento());
         this.administrador = bean.getAdministrador();
         this.password = bean.getPassword();
     }
@@ -107,7 +107,6 @@ public class Usuario {
     }
 
     @Column(name = "fechaNacimiento")
-    @org.hibernate.annotations.Type(type = "flpitu88.web.backend.psicoweb.utils.LocalDateUserType")
     public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }

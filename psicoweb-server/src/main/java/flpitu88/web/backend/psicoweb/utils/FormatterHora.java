@@ -6,7 +6,6 @@
 package flpitu88.web.backend.psicoweb.utils;
 
 import java.time.LocalTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -15,16 +14,13 @@ import java.time.format.DateTimeFormatter;
  */
 public class FormatterHora {
 
-    private static final String zoneId = "America/Buenos_Aires";
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
     public static LocalTime crearHoraDesdeString(String horaString) {
-        formatter.withZone(ZoneId.of(zoneId));
         return LocalTime.parse(horaString, formatter);
     }
 
     public static String crearStringDesdeLocalTimeISO(LocalTime lt) {
-        formatter.withZone(ZoneId.of(zoneId));
         return lt.format(formatter);
     }
     

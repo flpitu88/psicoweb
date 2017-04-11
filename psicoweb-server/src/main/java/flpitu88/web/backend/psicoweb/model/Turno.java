@@ -31,15 +31,18 @@ public class Turno {
     private LocalDate dia;
     private LocalTime horario;
     private Usuario usuario;
+    private MotivoConsulta motivo;
 
     public Turno() {
     }
 
-    public Turno(Integer id, LocalDate dia, LocalTime horario, Usuario usuario) {
+    public Turno(Integer id, LocalDate dia, LocalTime horario,
+            Usuario usuario, MotivoConsulta motivo) {
         this.id = id;
         this.dia = dia;
         this.horario = horario;
         this.usuario = usuario;
+        this.motivo = motivo;
     }
 
     public Turno(TurnoDTO turnoBean, Usuario usuario) {
@@ -60,7 +63,6 @@ public class Turno {
     }
 
     @Column(name = "dia")
-    @org.hibernate.annotations.Type(type = "flpitu88.web.backend.psicoweb.utils.LocalDateUserType")
     public LocalDate getDia() {
         return dia;
     }
@@ -70,7 +72,6 @@ public class Turno {
     }
 
     @Column(name = "horario")
-    @org.hibernate.annotations.Type(type = "flpitu88.web.backend.psicoweb.utils.LocalTimeUserType")
     public LocalTime getHorario() {
         return horario;
     }
@@ -87,6 +88,16 @@ public class Turno {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "idMotivo")
+    public MotivoConsulta getMotivo() {
+        return motivo;
+    }
+
+    public void setMotivo(MotivoConsulta motivo) {
+        this.motivo = motivo;
     }
 
 }

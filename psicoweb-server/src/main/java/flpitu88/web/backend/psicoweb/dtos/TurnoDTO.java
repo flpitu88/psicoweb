@@ -5,6 +5,7 @@
  */
 package flpitu88.web.backend.psicoweb.dtos;
 
+import flpitu88.web.backend.psicoweb.model.MotivoConsulta;
 import flpitu88.web.backend.psicoweb.model.Turno;
 import flpitu88.web.backend.psicoweb.utils.FormatterFecha;
 import flpitu88.web.backend.psicoweb.utils.FormatterHora;
@@ -18,20 +19,23 @@ public class TurnoDTO {
     private String dia;
     private String hora;
     private String usuario;
+    private MotivoConsulta motivo;
 
     public TurnoDTO() {
     }
 
-    public TurnoDTO(String dia, String hora, String usuario) {
+    public TurnoDTO(String dia, String hora, String usuario, MotivoConsulta motivo) {
         this.dia = dia;
         this.hora = hora;
         this.usuario = usuario;
+        this.motivo = motivo;
     }
 
     public TurnoDTO(Turno t) {
         this.dia = FormatterFecha.crearStringDesdeLocalDateISO(t.getDia());
         this.hora = FormatterHora.crearStringDesdeLocalTimeISO(t.getHorario());
         this.usuario = (t.getUsuario() != null) ? t.getUsuario().getNombreCompleto() : "Disponible";
+        this.motivo = t.getMotivo();
     }
 
     public String getDia() {
@@ -56,6 +60,14 @@ public class TurnoDTO {
 
     public void setUsuario(String usuario) {
         this.usuario = usuario;
+    }
+
+    public MotivoConsulta getMotivo() {
+        return motivo;
+    }
+
+    public void setMotivo(MotivoConsulta motivo) {
+        this.motivo = motivo;
     }
 
 }

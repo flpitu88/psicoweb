@@ -12,6 +12,7 @@ import flpitu88.web.backend.psicoweb.dtos.TurnoDTO;
 import flpitu88.web.backend.psicoweb.model.Turno;
 import flpitu88.web.backend.psicoweb.serviceapis.TurnosAPI;
 import flpitu88.web.backend.psicoweb.utils.FormatterFecha;
+import flpitu88.web.backend.psicoweb.utils.FormatterHora;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -25,6 +26,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.springframework.stereotype.Component;
@@ -70,7 +72,7 @@ public class TurnosResource {
         logger.log(Level.INFO,
                 "------ El administrador solicita conocer los turnos registrados ---------");
         List<TurnoDTO> turnosBean = new ArrayList<>();
-        List<Turno> turnos = turnosSrv.getTurnos();
+        List<Turno> turnos = turnosSrv.getTurnosRegistrados();
         turnos.stream().forEach((t) -> {
             TurnoDTO bean = new TurnoDTO(t);
             turnosBean.add(bean);
@@ -82,15 +84,38 @@ public class TurnosResource {
     @Path("/dias/disponibles")
     @Produces(MediaType.APPLICATION_JSON)
     @Secured
-    public Set<String> getTurnosDisponibles() {
+    public Set<String> getDiasConTurnosDisponibles() {
         logger.log(Level.INFO,
                 "------ Se solicita conocer la lista de dias con turnos disponibles ---------");
         Set<String> diasTurnosDisponibles = new HashSet<>();
-        List<Turno> turnosDisponibles = turnosSrv.getTurnosDisponibles();
+        List<Turno> turnosDisponibles = turnosSrv.getDiasConTurnosDisponibles();
         turnosDisponibles.stream().forEach(
                 t -> diasTurnosDisponibles
                         .add(FormatterFecha.crearStringDesdeLocalDate(t.getDia())));
         return diasTurnosDisponibles;
+    }
+
+    @GET
+    @Path("/horas/disponibles/{dia}/{mes}/{ano}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Secured
+    public List<String> getHorasDisponiblesDelDia(
+            @PathParam("dia") String dia,
+            @PathParam("mes") String mes,
+            @PathParam("ano") String ano) {
+        logger.log(Level.INFO,
+                "------ Se solicita conocer la lista de horarios del dia {0}/{1}/{2} ---------",
+                new Object[]{dia, mes, ano});
+        List<String> horasDeDiasDisponibles = new ArrayList<>();
+        List<Turno> turnosDelDiaDisponibles = turnosSrv
+                .getTurnosDisponiblesDelDia(
+                        LocalDate.of(
+                                Integer.parseInt(ano),
+                                Integer.parseInt(mes),
+                                Integer.parseInt(dia)));
+        turnosDelDiaDisponibles.stream().forEach(
+                t -> horasDeDiasDisponibles.add(FormatterHora.crearStringDesdeLocalTime(t.getHorario())));
+        return horasDeDiasDisponibles;
     }
 
     @PUT

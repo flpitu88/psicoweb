@@ -48,13 +48,15 @@ public class TurnosService implements TurnosAPI {
     public void registrarTurno(TurnoDTO tBean, String email) {
         Usuario usuario = usuariosDAO.getUsuarioByMail(email);
         Turno turno = new Turno(tBean, usuario);
-        turnosDAO.guardarTurno(turno);
+        Turno buscado = turnosDAO.getTurnoLibre(turno);
+        buscado.setUsuario(usuario);
+        turnosDAO.actualizarTurno(buscado);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<Turno> getTurnos() {
-        return turnosDAO.getTurnos();
+    public List<Turno> getTurnosRegistrados() {
+        return turnosDAO.getTurnosRegistrados();
     }
 
     @Override
@@ -94,7 +96,7 @@ public class TurnosService implements TurnosAPI {
 
     private void crearTurnosDeLunes(LocalDate proxLunes, Integer horaInicio, Long duracionTurno, Long minEntreTurnos) {
         LocalTime primerHora = LocalTime.of(horaInicio, 0);
-        Turno turnoNuevo = new Turno(null, proxLunes, primerHora, null);
+        Turno turnoNuevo = new Turno(null, proxLunes, primerHora, null, null);
         imprimirTurnoAGuardar(turnoNuevo);
         turnosDAO.guardarTurno(turnoNuevo);
         generarTurnosDelDia(turnoNuevo, duracionTurno, minEntreTurnos);
@@ -102,7 +104,7 @@ public class TurnosService implements TurnosAPI {
 
     private void crearTurnosDeMiercoles(LocalDate proxMiercoles, Integer horaInicio, Long duracionTurno, Long minEntreTurnos) {
         LocalTime primerHora = LocalTime.of(horaInicio, 0);
-        Turno turnoNuevo = new Turno(null, proxMiercoles, primerHora, null);
+        Turno turnoNuevo = new Turno(null, proxMiercoles, primerHora, null, null);
         imprimirTurnoAGuardar(turnoNuevo);
         turnosDAO.guardarTurno(turnoNuevo);
         generarTurnosDelDia(turnoNuevo, duracionTurno, minEntreTurnos);
@@ -111,7 +113,7 @@ public class TurnosService implements TurnosAPI {
     private void generarTurnosDelDia(Turno turno, Long duracionTurno, Long minEntreTurno) {
         LocalTime proxHora = turno.getHorario().plusMinutes(duracionTurno + minEntreTurno);
         while (proxHora.getHour() < 21) {
-            Turno nuevoTurno = new Turno(null, turno.getDia(), proxHora, null);
+            Turno nuevoTurno = new Turno(null, turno.getDia(), proxHora, null, null);
             imprimirTurnoAGuardar(nuevoTurno);
             turnosDAO.guardarTurno(nuevoTurno);
             proxHora = nuevoTurno.getHorario().plusMinutes(duracionTurno + minEntreTurno);
@@ -127,8 +129,14 @@ public class TurnosService implements TurnosAPI {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Turno> getTurnosDisponibles() {
-        return turnosDAO.getTurnosDisponibles();
+    public List<Turno> getDiasConTurnosDisponibles() {
+        return turnosDAO.getDiasConTurnosDisponibles();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Turno> getTurnosDisponiblesDelDia(LocalDate dia) {
+        return turnosDAO.getTurnosDisponiblesDelDia(dia);
     }
 
 }
