@@ -39,7 +39,7 @@
                             </div>
                             <div class="panel-body">
                                 <div ng-repeat="motivo in motivos">
-                                    <h6><input type="radio" value={{motivo.id}} ng-model="motivo.id" ng-change="radioChanged({{motivo.id}})"/> {{motivo.motivo}}</h6>
+                                    <h6><input type="radio" name="motivo" value={{motivo.id}} ng-model="motivo.id" ng-change="radioChanged({{motivo.id}})"/> {{motivo.motivo}}</h6>
                                 </div>
                             </div>
                         </div>

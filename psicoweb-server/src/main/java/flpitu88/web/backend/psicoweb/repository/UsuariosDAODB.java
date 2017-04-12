@@ -9,7 +9,6 @@ import flpitu88.web.backend.psicoweb.model.Usuario;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -49,8 +48,8 @@ public class UsuariosDAODB implements UsuariosDAO {
     @Override
     public Usuario getUsuarioByMail(String email) {
         return (Usuario) sessionFactory.getCurrentSession()
-                .createCriteria(Usuario.class)
-                .add(Restrictions.eq("mail", email))
+                .createQuery("from Usuario u where u.mail = :mail")
+                .setParameter("mail", email)
                 .uniqueResult();
     }
 

@@ -23,19 +23,17 @@ app.controller('SacarTurnoController', ['$scope', '$location', '$auth', '$http',
         }
 
         function obtenerMotivoPorId(idBuscado) {
-            console.log('Entro a obtener motivo de id: ' + idBuscado);
+            var motivoSelec = {};
             for (var i = 0; i < $scope.motivos.length; i++) {
-                console.log('Este motivo es: ' + JSON.stringify($scope.motivos[i]));
                 if ($scope.motivos[i].id === idBuscado) {
-                    console.log('El motivo seleccionado es: ' + JSON.stringify($scope.motivos[i]));
-                    return $scope.motivos[i];
+                    motivoSelec['id'] = idBuscado;
+                    motivoSelec['motivo'] = $scope.motivos[i].motivo;
+                    return motivoSelec;
                 }
             }
-
         }
 
         function obtenerMotivosDeConsulta() {
-            console.log('Entro a ver los motivos de consulta');
             $http({
                 method: 'GET',
                 url: urlMotivosConsulta,
@@ -43,8 +41,6 @@ app.controller('SacarTurnoController', ['$scope', '$location', '$auth', '$http',
                     'Accept': 'application/json'
                 }
             }).then(function (response) {
-                console.log('Los motivos son: ' + response.data);
-                console.log(JSON.stringify(response.data));
                 $scope.motivos = response.data;
             }).catch(function (response) {
                 console.log(response.status + ': Error en el pedido de motivos de consulta: ');
@@ -53,12 +49,13 @@ app.controller('SacarTurnoController', ['$scope', '$location', '$auth', '$http',
 
         $scope.$watch("horaElegida", function (newValue, oldValue) {
             obtenerMotivosDeConsulta();
+            motivoSeleccionadoId = undefined;
         });
 
         $scope.$watch("diaElegido", function (newValue, oldValue) {
             $scope.horas = null;
-            console.log('oldValue vale: ' + oldValue);
-            console.log('newValue vale: ' + newValue);
+            motivoSeleccionadoId = undefined;
+            $scope.horaElegida = undefined;
             $http({
                 method: 'GET',
                 url: urlTurnos + '/horas/disponibles/' + newValue,
@@ -74,16 +71,12 @@ app.controller('SacarTurnoController', ['$scope', '$location', '$auth', '$http',
 
         $scope.registrarTurno = function () {
 
-            console.log('motivo: ' + motivoSeleccionadoId);
-
             var turnoElegido = {
                 dia: $scope.diaElegido,
                 hora: $scope.horaElegida,
                 usuario: '',
                 motivo: obtenerMotivoPorId(motivoSeleccionadoId)
             };
-
-            console.log('El turno elegido es: ' + JSON.stringify(turnoElegido));
 
             $http({
                 method: 'POST',
@@ -105,12 +98,11 @@ app.controller('SacarTurnoController', ['$scope', '$location', '$auth', '$http',
         };
 
         $scope.isCompleto = function () {
-//            return (!$scope.hayDiaYHorarioSeleccionado() || $scope.motivoElegido === undefined);
-            return false;
+            return (!$scope.hayDiaYHorarioSeleccionado() || motivoSeleccionadoId === undefined);
         };
 
         $scope.radioChanged = function (item) {
-            console.log('en radio changed item.id vale: ' + item);
             motivoSeleccionadoId = item;
         };
+     
     }]);

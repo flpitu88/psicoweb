@@ -1,31 +1,53 @@
 /* app css stylesheet */
 
 .menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+    list-style: none;
+    border-bottom: 0.1em solid black;
+    margin-bottom: 2em;
+    padding: 0 0 0.5em;
 }
 
 .menu:before {
-  content: "[";
+    content: "[";
 }
 
 .menu:after {
-  content: "]";
+    content: "]";
 }
 
 .menu > li {
-  display: inline;
+    display: inline;
 }
 
 .menu > li + li:before {
-  content: "|";
-  padding-right: 0.3em;
+    content: "|";
+    padding-right: 0.3em;
 }
 
 .panel-turnos{
     width: 70%;
     margin-left: 15%;
     margin-right: 15%;
+}
+
+div.jumbotron{   
+    background: url("images/logo3D.jpg") no-repeat center center; 
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    -o-background-size: 100% 100%;
+    background-size: 100% 100%;
+}
+
+nav.navbar{
+    background-color: #3e2774;
+    border-color: #000000;
+}
+
+.tituloSitio{
+    color: white;
+    margin-right: 50px;
+}
+
+.navbar-nav>li>a{
+    font-style: oblique;
 }

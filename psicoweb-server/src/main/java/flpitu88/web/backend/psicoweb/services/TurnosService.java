@@ -33,16 +33,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @PropertySource({"classpath:generadorTurnos.properties"})
 public class TurnosService implements TurnosAPI {
-
+    
     @Autowired
     private TurnosDAO turnosDAO;
-
+    
     @Autowired
     private UsuariosDAO usuariosDAO;
-
+    
     @Autowired
     private Environment env;
-
+    
     @Override
     @Transactional(readOnly = false)
     public void registrarTurno(TurnoDTO tBean, String email) {
@@ -50,15 +50,16 @@ public class TurnosService implements TurnosAPI {
         Turno turno = new Turno(tBean, usuario);
         Turno buscado = turnosDAO.getTurnoLibre(turno);
         buscado.setUsuario(usuario);
+        buscado.setMotivo(tBean.getMotivo());
         turnosDAO.actualizarTurno(buscado);
     }
-
+    
     @Override
     @Transactional(readOnly = true)
     public List<Turno> getTurnosRegistrados() {
         return turnosDAO.getTurnosRegistrados();
     }
-
+    
     @Override
     @Transactional(readOnly = false)
     public void generarTurnosDisponibles() {
@@ -66,34 +67,34 @@ public class TurnosService implements TurnosAPI {
         String horaInicioMiercolesString = env.getProperty("HORA_INICIO_MIERCOLES");
         String minutosDuracionTurnoString = env.getProperty("MINUTOS_DURACION_TURNO");
         String minutosEntreTurnosString = env.getProperty("MINUTOS_ENTRE_TURNOS");
-
+        
         LocalDate ultimoDia = LocalDate.now();
-
+        
         TemporalAdjuster adjLunes = TemporalAdjusters.next(DayOfWeek.MONDAY);
         TemporalAdjuster adjMiercoles = TemporalAdjusters.next(DayOfWeek.WEDNESDAY);
-
+        
         LocalDate proxLunes = ultimoDia.with(adjLunes);
         LocalDate proxMiercoles = ultimoDia.with(adjMiercoles);
-
+        
         do {
             crearTurnosDeLunes(
                     proxLunes,
                     Integer.parseInt(horaInicioLunesString),
                     Long.parseLong(minutosDuracionTurnoString),
                     Long.parseLong(minutosEntreTurnosString));
-
+            
             crearTurnosDeMiercoles(
                     proxMiercoles,
                     Integer.parseInt(horaInicioMiercolesString),
                     Long.parseLong(minutosDuracionTurnoString),
                     Long.parseLong(minutosEntreTurnosString));
-
+            
             proxLunes = proxLunes.with(adjLunes);
             proxMiercoles = proxMiercoles.with(adjMiercoles);
-
+            
         } while (DAYS.between(ultimoDia, proxLunes) < 15 && DAYS.between(ultimoDia, proxMiercoles) < 15);
     }
-
+    
     private void crearTurnosDeLunes(LocalDate proxLunes, Integer horaInicio, Long duracionTurno, Long minEntreTurnos) {
         LocalTime primerHora = LocalTime.of(horaInicio, 0);
         Turno turnoNuevo = new Turno(null, proxLunes, primerHora, null, null);
@@ -101,7 +102,7 @@ public class TurnosService implements TurnosAPI {
         turnosDAO.guardarTurno(turnoNuevo);
         generarTurnosDelDia(turnoNuevo, duracionTurno, minEntreTurnos);
     }
-
+    
     private void crearTurnosDeMiercoles(LocalDate proxMiercoles, Integer horaInicio, Long duracionTurno, Long minEntreTurnos) {
         LocalTime primerHora = LocalTime.of(horaInicio, 0);
         Turno turnoNuevo = new Turno(null, proxMiercoles, primerHora, null, null);
@@ -109,7 +110,7 @@ public class TurnosService implements TurnosAPI {
         turnosDAO.guardarTurno(turnoNuevo);
         generarTurnosDelDia(turnoNuevo, duracionTurno, minEntreTurnos);
     }
-
+    
     private void generarTurnosDelDia(Turno turno, Long duracionTurno, Long minEntreTurno) {
         LocalTime proxHora = turno.getHorario().plusMinutes(duracionTurno + minEntreTurno);
         while (proxHora.getHour() < 21) {
@@ -119,24 +120,24 @@ public class TurnosService implements TurnosAPI {
             proxHora = nuevoTurno.getHorario().plusMinutes(duracionTurno + minEntreTurno);
         }
     }
-
+    
     private void imprimirTurnoAGuardar(Turno t) {
         System.out.println("Guardando turno del "
                 + FormatterFecha.crearStringDesdeLocalDate(t.getDia())
                 + " a las "
                 + FormatterHora.crearStringDesdeLocalTime(t.getHorario()));
     }
-
+    
     @Override
     @Transactional(readOnly = true)
     public List<Turno> getDiasConTurnosDisponibles() {
         return turnosDAO.getDiasConTurnosDisponibles();
     }
-
+    
     @Override
     @Transactional(readOnly = true)
     public List<Turno> getTurnosDisponiblesDelDia(LocalDate dia) {
         return turnosDAO.getTurnosDisponiblesDelDia(dia);
     }
-
+    
 }

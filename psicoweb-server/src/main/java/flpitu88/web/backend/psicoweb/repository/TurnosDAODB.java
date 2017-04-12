@@ -10,7 +10,6 @@ import java.time.LocalDate;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -38,18 +37,15 @@ public class TurnosDAODB implements TurnosDAO {
     @Override
     public List<Turno> getDiasConTurnosDisponibles() {
         return sessionFactory.getCurrentSession()
-                .createCriteria(Turno.class)
-                .add(Restrictions.isNull("usuario"))
+                .createQuery("from Turno t where t.usuario is null")
                 .list();
     }
 
     @Override
     public List<Turno> getTurnosDisponiblesDelDia(LocalDate ld) {
         return sessionFactory.getCurrentSession()
-                .createCriteria(Turno.class)
-                .add(Restrictions.and(
-                        Restrictions.eq("dia", ld),
-                        Restrictions.isNull("usuario")))
+                .createQuery("from Turno t where t.dia = :dia and t.usuario is null")
+                .setParameter("dia", ld)
                 .list();
     }
 
@@ -62,10 +58,9 @@ public class TurnosDAODB implements TurnosDAO {
     @Override
     public Turno getTurnoLibre(Turno t) {
         return (Turno) sessionFactory.getCurrentSession()
-                .createCriteria(Turno.class)
-                .add(Restrictions.and(
-                        Restrictions.eq("dia", t.getDia()),
-                        Restrictions.eq("horario", t.getHorario())))
+                .createQuery("from Turno t where t.dia = :dia and t.horario = :horario")
+                .setParameter("dia", t.getDia())
+                .setParameter("horario", t.getHorario())
                 .uniqueResult();
     }
 
