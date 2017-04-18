@@ -1,10 +1,6 @@
-app.controller('GestionTurnosController', ['$scope', '$auth', '$http', function ($scope, $auth, $http) {
+app.controller('GestionTurnosController', ['$scope', '$auth', '$http', '$uibModal', function ($scope, $auth, $http, $uibModal) {
 
         var urlTurnos = '/psicoweb-server/rest/turnos';
-
-        $scope.mostrarCartel = function () {
-            alert('¿Seguro que quiere cancelar el turno?');
-        };
 
         $scope.cargarTurnos = function () {
             $http({
@@ -20,4 +16,25 @@ app.controller('GestionTurnosController', ['$scope', '$auth', '$http', function 
             });
         };
 
+        $scope.showModalConfirmacion = function () {
+            $scope.aCancelar = {};
+            $scope.$modalInstance = $uibModal.open({
+                templateUrl: 'views/confirmacionModal.html',
+                controller: 'ConfirmarCancelacionModalController'
+            });
+        };
+
     }]);
+
+app.controller('ConfirmarCancelacionModalController', function ($scope, $uibModalInstance) {
+
+    $scope.confirmarEliminacion = function () {
+        console.log('confirme la eliminacion');
+        $uibModalInstance.close();
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.close();
+    };
+
+});
