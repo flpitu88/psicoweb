@@ -3,6 +3,7 @@ app.controller('SacarTurnoController', ['$scope', '$location', '$auth', '$http',
         var urlTurnos = '/psicoweb-server/rest/turnos';
         var urlMotivosConsulta = '/psicoweb-server/rest/motivosConsulta';
         var motivoSeleccionadoId;
+        $scope.nuevoMotivo = "";
 
         $scope.inicializarDatos = function () {
             obtenerTurnosDisponibles();
@@ -18,19 +19,24 @@ app.controller('SacarTurnoController', ['$scope', '$location', '$auth', '$http',
             }).then(function (response) {
                 $scope.dias = response.data;
             }).catch(function (response) {
-                console.log(response.status + 'Error en el pedido de dias disponibles: ');
+                console.log(response.status + ': Error en el pedido de dias disponibles');
             });
         }
 
         function obtenerMotivoPorId(idBuscado) {
             var motivoSelec = {};
-            for (var i = 0; i < $scope.motivos.length; i++) {
-                if ($scope.motivos[i].id === idBuscado) {
-                    motivoSelec['id'] = idBuscado;
-                    motivoSelec['motivo'] = $scope.motivos[i].motivo;
-                    return motivoSelec;
+            if (idBuscado === "nm") {
+                motivoSelec['id'] = null;
+                motivoSelec['motivo'] = $scope.nuevoMotivo;
+            } else {
+                for (var i = 0; i < $scope.motivos.length; i++) {
+                    if (parseInt($scope.motivos[i].id) === parseInt(idBuscado)) {
+                        motivoSelec['id'] = idBuscado;
+                        motivoSelec['motivo'] = $scope.motivos[i].motivo;
+                    }
                 }
             }
+            return motivoSelec;
         }
 
         function obtenerMotivosDeConsulta() {
@@ -43,7 +49,7 @@ app.controller('SacarTurnoController', ['$scope', '$location', '$auth', '$http',
             }).then(function (response) {
                 $scope.motivos = response.data;
             }).catch(function (response) {
-                console.log(response.status + ': Error en el pedido de motivos de consulta: ');
+                console.log(response.status + ': Error en el pedido de motivos de consulta');
             });
         }
 
@@ -65,7 +71,7 @@ app.controller('SacarTurnoController', ['$scope', '$location', '$auth', '$http',
             }).then(function (response) {
                 $scope.horas = response.data;
             }).catch(function (response) {
-                console.log(response.status + 'Error en el pedido de horas disponibles: ');
+                console.log(response.status + ': Error en el pedido de horas disponibles');
             });
         });
 
@@ -89,7 +95,7 @@ app.controller('SacarTurnoController', ['$scope', '$location', '$auth', '$http',
                 console.log(response.status + ' OK: El turno seleccionado se ha registrado correctamente');
                 $location.path("/home");
             }).catch(function (response) {
-                console.log(response.status + 'Error al registrar turno elegido: ');
+                console.log(response.status + ': Error al registrar turno elegido');
             });
         };
 
@@ -104,5 +110,9 @@ app.controller('SacarTurnoController', ['$scope', '$location', '$auth', '$http',
         $scope.radioChanged = function (item) {
             motivoSeleccionadoId = item;
         };
-     
+
+        $scope.seleccionoOtroMotivo = function () {
+            return !(motivoSeleccionadoId === "nm");
+        };
+
     }]);

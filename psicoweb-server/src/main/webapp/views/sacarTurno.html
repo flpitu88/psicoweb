@@ -10,7 +10,7 @@
                         </div>
                         <div class="col-md-5">
                             <div>
-                                <select ng-model="diaElegido">
+                                <select ng-model="diaElegido" style="width: 100px">
                                     <option ng-repeat="dia in dias" value="{{dia}}">{{dia}}</option>
                                 </select> 
                             </div>
@@ -24,7 +24,7 @@
                         </div>
                         <div class="col-md-5">
                             <div>
-                                <select ng-model="horaElegida">
+                                <select ng-model="horaElegida" style="width: 100px">
                                     <option ng-repeat="hora in horas" value="{{hora}}">{{hora}}</option>
                                 </select> 
                             </div>
@@ -33,13 +33,17 @@
                 </div>
                 <div class="form-group" ng-if="hayDiaYHorarioSeleccionado()">
                     <div class="row">
-                        <div class="panel panel-primary">
+                        <div class="panel panel-primary panel-motivo">
                             <div class="panel-heading">
                                 <h6>Ingrese el motivo de su consulta:</h6>
                             </div>
                             <div class="panel-body">
                                 <div ng-repeat="motivo in motivos">
                                     <h6><input type="radio" name="motivo" value={{motivo.id}} ng-model="motivo.id" ng-change="radioChanged({{motivo.id}})"/> {{motivo.motivo}}</h6>
+                                </div>
+                                <div>
+                                    <h6><input type="radio" name="motivo" value="nm" ng-model="otroMotivo" ng-change="radioChanged('nm')"/> Otro motivo</h6>
+                                    <textarea rows="2" cols="75" ng-disabled="seleccionoOtroMotivo()" ng-model="$parent.nuevoMotivo" maxlength="150"></textarea>
                                 </div>
                             </div>
                         </div>

@@ -33,4 +33,10 @@ public class MotivosConsultaDAODB implements MotivosConsultaDAO {
                 .list();
     }
 
+    @Override
+    public Integer guardarMotivo(MotivoConsulta motivo) {
+        return (Integer) sessionFactory.getCurrentSession()
+                .save(motivo);
+    }
+
 }

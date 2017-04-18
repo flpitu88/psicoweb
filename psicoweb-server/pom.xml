@@ -18,6 +18,7 @@
         <jetty.version>6.1.14</jetty.version>
         <jsp.version>6.1.14</jsp.version>
         <mysql.version>6.0.5</mysql.version>
+        <mockito.version>2.0.2-beta</mockito.version>
     </properties>
     
     <dependencies>
@@ -152,13 +153,10 @@
             <artifactId>commons-codec</artifactId>
             <version>1.9</version>
         </dependency>
-
-
     </dependencies>
     
     <build>
-        <plugins>
-            
+        <plugins>   
             <!--JETTY-->
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>

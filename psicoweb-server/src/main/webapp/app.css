@@ -31,7 +31,7 @@
 }
 
 div.jumbotron{   
-    background: url("images/logo3D.jpg") no-repeat center center; 
+    /*background: url("images/logo3D.jpg") no-repeat center center;*/ 
     -webkit-background-size: 100% 100%;
     -moz-background-size: 100% 100%;
     -o-background-size: 100% 100%;
@@ -50,4 +50,8 @@ nav.navbar{
 
 .navbar-nav>li>a{
     font-style: oblique;
+}
+
+.panel-motivo{
+    margin: 5%;
 }

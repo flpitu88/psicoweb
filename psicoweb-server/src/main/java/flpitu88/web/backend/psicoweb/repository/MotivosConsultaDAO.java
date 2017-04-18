@@ -16,4 +16,6 @@ public interface MotivosConsultaDAO {
 
     public List<MotivoConsulta> getMotivosDeConsulta();
 
+    public Integer guardarMotivo(MotivoConsulta motivo);
+
 }
