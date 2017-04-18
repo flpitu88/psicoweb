@@ -159,4 +159,11 @@ public class TurnosService implements TurnosAPI {
         return turnosDAO.getTurnosDisponiblesDelDia(dia);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<Turno> getTurnosDelUsuario(String mailUsuario) {
+        Usuario u = usuariosDAO.getUsuarioByMail(mailUsuario);
+        return turnosDAO.obtenerTurnosDeUsuario(u);
+    }
+
 }

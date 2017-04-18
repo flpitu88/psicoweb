@@ -6,6 +6,7 @@
 package flpitu88.web.backend.psicoweb.repository;
 
 import flpitu88.web.backend.psicoweb.model.Turno;
+import flpitu88.web.backend.psicoweb.model.Usuario;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -14,11 +15,11 @@ import java.util.List;
  * @author flpitu88
  */
 public interface TurnosDAO {
-    
+
     public void guardarTurno(Turno t);
 
     public void actualizarTurno(Turno t);
-    
+
     public Turno getTurnoLibre(Turno t);
 
     public List<Turno> getTurnosRegistrados();
@@ -26,5 +27,7 @@ public interface TurnosDAO {
     public List<Turno> getDiasConTurnosDisponibles();
 
     public List<Turno> getTurnosDisponiblesDelDia(LocalDate ld);
+
+    public List<Turno> obtenerTurnosDeUsuario(Usuario u);
 
 }

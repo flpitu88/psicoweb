@@ -125,4 +125,18 @@ public class TurnosResource {
         turnosSrv.generarTurnosDisponibles();
     }
 
+    @GET
+    @Secured
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<TurnoDTO> getTurnosDelUsuario() {
+        String emailUser = proveedorUsuarioSrv.getEmailUsuario();
+        logger.log(Level.INFO,
+                "------ El usuario {0} solicita su listado de turnos asignados ---------",
+                emailUser);
+        List<Turno> turnosModelo = turnosSrv.getTurnosDelUsuario(emailUser);
+        List<TurnoDTO> turnosBean = new ArrayList<>();
+        turnosModelo.forEach(t -> turnosBean.add(new TurnoDTO(t)));
+        return turnosBean;
+    }
+
 }

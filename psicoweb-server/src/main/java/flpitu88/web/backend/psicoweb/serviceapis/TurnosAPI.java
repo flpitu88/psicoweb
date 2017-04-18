@@ -23,7 +23,9 @@ public interface TurnosAPI {
     public List<Turno> getDiasConTurnosDisponibles();
 
     public void generarTurnosDisponibles();
-    
+
     public List<Turno> getTurnosDisponiblesDelDia(LocalDate dia);
+
+    public List<Turno> getTurnosDelUsuario(String mailUsuario);
 
 }

@@ -6,6 +6,7 @@
 package flpitu88.web.backend.psicoweb.repository;
 
 import flpitu88.web.backend.psicoweb.model.Turno;
+import flpitu88.web.backend.psicoweb.model.Usuario;
 import java.time.LocalDate;
 import java.util.List;
 import org.hibernate.Session;
@@ -67,5 +68,13 @@ public class TurnosDAODB implements TurnosDAO {
     @Override
     public void guardarTurno(Turno t) {
         sessionFactory.getCurrentSession().save(t);
+    }
+
+    @Override
+    public List<Turno> obtenerTurnosDeUsuario(Usuario u) {
+        return sessionFactory.getCurrentSession()
+                .createQuery("from Turno t where t.usuario = :usuario order by t.dia asc")
+                .setParameter("usuario", u)
+                .list();
     }
 }

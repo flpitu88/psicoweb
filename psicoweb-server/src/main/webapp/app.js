@@ -34,6 +34,10 @@ app.config(['$locationProvider', '$routeProvider', '$authProvider', function ($l
                     templateUrl: 'views/sacarTurno.html',
                     controller: 'SacarTurnoController'
                 })
+                .when('/gestionTurnos', {
+                    templateUrl: 'views/gestionTurnos.html',
+                    controller: 'GestionTurnosController'
+                })
 
                 .otherwise({redirectTo: '/home'});
 

@@ -1,0 +1,27 @@
+<div class="container-fluid" ng-init="cargarTurnos()">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4>Turnos Registrados</h4>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped">
+                <tr class="text-center" style="font-weight: bold; background-color: lightblue">
+                    <td>Dia</td>
+                    <td>Hora</td>
+                    <td>Motivo</td>
+                    <td></td>
+                </tr>
+                <tr ng-repeat="turno in turnos">
+                    <td class="text-center">{{ turno.dia }}</td>
+                    <td class="text-center">{{ turno.hora }}</td>
+                    <td>{{ turno.motivo.motivo }}</td>
+                    <td>
+                        <button type="button" ng-click="mostrarCartel()" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-remove"></span> Cancelar
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
