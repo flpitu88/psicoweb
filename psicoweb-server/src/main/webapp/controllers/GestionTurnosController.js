@@ -16,20 +16,43 @@ app.controller('GestionTurnosController', ['$scope', '$auth', '$http', '$uibModa
             });
         };
 
-        $scope.showModalConfirmacion = function () {
-            $scope.aCancelar = {};
+        $scope.showModalConfirmacion = function (idTurno) {
+            $scope.aCancelar = idTurno;
             $scope.$modalInstance = $uibModal.open({
                 templateUrl: 'views/confirmacionModal.html',
-                controller: 'ConfirmarCancelacionModalController'
+                controller: 'ConfirmarCancelacionModalController',
+                scope: $scope
             });
         };
 
     }]);
 
-app.controller('ConfirmarCancelacionModalController', function ($scope, $uibModalInstance) {
+app.controller('ConfirmarCancelacionModalController', function ($scope, $uibModalInstance, $http) {
+
+    var urlTurnos = '/psicoweb-server/rest/turnos';
+
+    function obtenerIndexDeElementoDeId(idBuscado) {
+        for (var i = 0; i < $scope.turnos.length; i++) {
+            if (parseInt($scope.turnos[i].id) === parseInt(idBuscado)) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
     $scope.confirmarEliminacion = function () {
-        console.log('confirme la eliminacion');
+        $http({
+            method: 'DELETE',
+            url: urlTurnos + "?id=" + $scope.aCancelar
+        }).then(function (response) {
+            var index = obtenerIndexDeElementoDeId($scope.aCancelar);
+            console.log('index vale: ' + index);
+            $scope.turnos.splice(index, 1);
+            console.log(response.status + ': El turno se cancelo correctamente');
+        }).catch(function (response) {
+            console.log(response.status + ': Error en el pedido de cancelacion de turno');
+        });
+
         $uibModalInstance.close();
     };
 

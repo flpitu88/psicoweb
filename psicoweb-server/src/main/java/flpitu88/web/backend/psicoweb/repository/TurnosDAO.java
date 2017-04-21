@@ -30,4 +30,5 @@ public interface TurnosDAO {
 
     public List<Turno> obtenerTurnosDeUsuario(Usuario u);
 
+    public Turno getTurnoPorId(Integer id);
 }

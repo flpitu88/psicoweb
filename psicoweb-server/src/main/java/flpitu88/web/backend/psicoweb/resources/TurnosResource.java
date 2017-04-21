@@ -22,12 +22,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import org.springframework.stereotype.Component;
 
@@ -38,21 +40,21 @@ import org.springframework.stereotype.Component;
 @Path("/turnos")
 @Component
 public class TurnosResource {
-
+    
     private final TurnosAPI turnosSrv;
-
+    
     private final ProveedorUsuarioRequestFilter proveedorUsuarioSrv;
-
+    
     private static final Logger logger
             = Logger.getLogger(TurnosResource.class.getName());
-
+    
     @Inject
     public TurnosResource(TurnosAPI turnosSrv,
             ProveedorUsuarioRequestFilter proveedorUsuarioSrv) {
         this.turnosSrv = turnosSrv;
         this.proveedorUsuarioSrv = proveedorUsuarioSrv;
     }
-
+    
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Secured
@@ -63,7 +65,7 @@ public class TurnosResource {
                 "------ El usuario {0} registra un turno para el dia {1} en el horario {2} ---------",
                 new Object[]{emailUser, turnoBean.getDia(), turnoBean.getHora()});
     }
-
+    
     @GET
     @Path("/admin")
     @Produces(MediaType.APPLICATION_JSON)
@@ -79,7 +81,7 @@ public class TurnosResource {
         });
         return turnosBean;
     }
-
+    
     @GET
     @Path("/dias/disponibles")
     @Produces(MediaType.APPLICATION_JSON)
@@ -94,7 +96,7 @@ public class TurnosResource {
                         .add(FormatterFecha.crearStringDesdeLocalDate(t.getDia())));
         return diasTurnosDisponibles;
     }
-
+    
     @GET
     @Path("/horas/disponibles/{dia}/{mes}/{ano}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -117,14 +119,14 @@ public class TurnosResource {
                 t -> horasDeDiasDisponibles.add(FormatterHora.crearStringDesdeLocalTime(t.getHorario())));
         return horasDeDiasDisponibles;
     }
-
+    
     @PUT
     public void generarTurnosProximos() {
         logger.log(Level.INFO,
                 "------ Se solicita generar los nuevos turnos proximos ---------");
         turnosSrv.generarTurnosDisponibles();
     }
-
+    
     @GET
     @Secured
     @Produces(MediaType.APPLICATION_JSON)
@@ -138,5 +140,15 @@ public class TurnosResource {
         turnosModelo.forEach(t -> turnosBean.add(new TurnoDTO(t)));
         return turnosBean;
     }
-
+    
+    @DELETE
+    @Secured
+    public void cancelarTurnoPorId(@QueryParam("id") Integer id) {
+        String emailUser = proveedorUsuarioSrv.getEmailUsuario();
+        logger.log(Level.INFO,
+                "------ El usuario {0} solicita cancelar su turno de id {1} ---------",
+                new Object[]{emailUser, id});
+        turnosSrv.cancelarReservaDeTurno(id);
+    }
+    
 }

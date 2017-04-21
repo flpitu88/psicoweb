@@ -77,4 +77,12 @@ public class TurnosDAODB implements TurnosDAO {
                 .setParameter("usuario", u)
                 .list();
     }
+
+    @Override
+    public Turno getTurnoPorId(Integer id) {
+        return (Turno) sessionFactory.getCurrentSession()
+                .createQuery("from Turno t where t.id = :id")
+                .setParameter("id", id)
+                .uniqueResult();
+    }
 }

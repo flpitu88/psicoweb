@@ -28,4 +28,5 @@ public interface TurnosAPI {
 
     public List<Turno> getTurnosDelUsuario(String mailUsuario);
 
+    public void cancelarReservaDeTurno(Integer idTurno);
 }
