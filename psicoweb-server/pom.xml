@@ -19,6 +19,7 @@
         <jsp.version>6.1.14</jsp.version>
         <mysql.version>6.0.5</mysql.version>
         <mockito.version>2.0.2-beta</mockito.version>
+        <junit.version>4.12</junit.version>
     </properties>
     
     <dependencies>
@@ -152,6 +153,32 @@
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
             <version>1.9</version>
+        </dependency>
+        <!--ENVIO DE MAIL-->    
+        <!-- https://mvnrepository.com/artifact/javax/javaee-api -->
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <!--TESTING-->
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>${mockito.version}</version>
         </dependency>
     </dependencies>
     
