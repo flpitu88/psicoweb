@@ -5,11 +5,13 @@
  */
 package flpitu88.web.backend.psicoweb.serviceapis;
 
+import flpitu88.web.backend.psicoweb.model.Mail;
+
 /**
  *
  * @author flpitu88
  */
 public interface MailsAPI {
 
-    public void enviarMail();
+    public void enviarMail(Mail mail);
 }

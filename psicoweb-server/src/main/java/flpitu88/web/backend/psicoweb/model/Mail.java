@@ -5,31 +5,37 @@
  */
 package flpitu88.web.backend.psicoweb.model;
 
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+
 /**
  *
  * @author flpitu88
  */
+@PropertySource({"classpath:contenidoMails.properties"})
 public abstract class Mail {
 
-    private String destinatario;
-    private String asunto;
+    @Autowired
+    private Environment env;
 
-    public abstract String getMensaje(Turno turno);
+    private List<String> destinatario;
 
-    public String getDestinatario() {
+    public List<String> getDestinatario() {
         return destinatario;
     }
 
-    public void setDestinatario(String destinatario) {
+    public void setDestinatario(List<String> destinatario) {
         this.destinatario = destinatario;
     }
 
-    public String getAsunto() {
-        return asunto;
+    public Environment getEnv() {
+        return env;
     }
 
-    public void setAsunto(String asunto) {
-        this.asunto = asunto;
-    }
+    public abstract String getAsunto();
+
+    public abstract String getMensaje(Turno turno);
 
 }

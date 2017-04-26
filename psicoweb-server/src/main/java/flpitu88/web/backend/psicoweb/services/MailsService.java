@@ -5,6 +5,7 @@
  */
 package flpitu88.web.backend.psicoweb.services;
 
+import flpitu88.web.backend.psicoweb.model.Mail;
 import flpitu88.web.backend.psicoweb.serviceapis.MailsAPI;
 import java.util.Properties;
 import javax.mail.Message;
@@ -31,7 +32,7 @@ public class MailsService implements MailsAPI {
     private Environment env;
     
     @Override
-    public void enviarMail() {
+    public void enviarMail(Mail mail) {
         final String username = env.getProperty("direccionMail");
         final String password = env.getProperty("clave");
         
