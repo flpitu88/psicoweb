@@ -6,6 +6,8 @@
 package flpitu88.web.backend.psicoweb.model;
 
 import java.util.List;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -20,14 +22,27 @@ public abstract class Mail {
     @Autowired
     private Environment env;
 
-    private List<String> destinatario;
+    private InternetAddress[] destinatarios;
 
-    public List<String> getDestinatario() {
-        return destinatario;
+    public Mail(InternetAddress[] destinatarios) {
+        this.destinatarios = destinatarios;
     }
 
-    public void setDestinatario(List<String> destinatario) {
-        this.destinatario = destinatario;
+    public Mail(List<String> direccionesMail) throws AddressException {
+        destinatarios = new InternetAddress[direccionesMail.size()];
+        int i = 0;
+        for (String dirMail : direccionesMail) {
+            destinatarios[i] = new InternetAddress(dirMail);
+            i++;
+        }
+    }
+
+    public InternetAddress[] getDestinatarios() {
+        return destinatarios;
+    }
+
+    public void setDestinatarios(InternetAddress[] destinatarios) {
+        this.destinatarios = destinatarios;
     }
 
     public Environment getEnv() {
@@ -36,6 +51,5 @@ public abstract class Mail {
 
     public abstract String getAsunto();
 
-    public abstract String getMensaje(Turno turno);
-
+    public abstract String getMensaje();
 }

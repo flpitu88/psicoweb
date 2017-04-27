@@ -14,4 +14,6 @@ import flpitu88.web.backend.psicoweb.model.Mail;
 public interface MailsAPI {
 
     public void enviarMail(Mail mail);
+    
+    public String getMailDeAdministradora();
 }

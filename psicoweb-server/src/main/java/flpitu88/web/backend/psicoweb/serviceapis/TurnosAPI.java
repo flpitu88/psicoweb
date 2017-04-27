@@ -9,6 +9,7 @@ import flpitu88.web.backend.psicoweb.dtos.TurnoDTO;
 import flpitu88.web.backend.psicoweb.model.Turno;
 import java.time.LocalDate;
 import java.util.List;
+import javax.mail.internet.AddressException;
 
 /**
  *
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public interface TurnosAPI {
 
-    public void registrarTurno(TurnoDTO tBean, String usuario);
+    public void registrarTurno(TurnoDTO tBean, String email) throws AddressException;
 
     public List<Turno> getTurnosRegistrados();
 
@@ -28,5 +29,5 @@ public interface TurnosAPI {
 
     public List<Turno> getTurnosDelUsuario(String mailUsuario);
 
-    public void cancelarReservaDeTurno(Integer idTurno);
+    public void cancelarReservaDeTurno(Integer idTurno) throws AddressException;
 }

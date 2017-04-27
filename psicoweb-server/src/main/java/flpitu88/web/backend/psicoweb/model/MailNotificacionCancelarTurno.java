@@ -8,6 +8,9 @@ package flpitu88.web.backend.psicoweb.model;
 import flpitu88.web.backend.psicoweb.utils.FormatterFecha;
 import flpitu88.web.backend.psicoweb.utils.FormatterHora;
 import java.text.MessageFormat;
+import java.util.List;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 
 /**
  *
@@ -16,6 +19,13 @@ import java.text.MessageFormat;
 public class MailNotificacionCancelarTurno extends Mail {
 
     private Turno turnoCancelado;
+
+    public MailNotificacionCancelarTurno(
+            Turno turnoCancelado,
+            List<String> direccionesMail) throws AddressException {
+        super(direccionesMail);
+        this.turnoCancelado = turnoCancelado;
+    }
 
     public Turno getTurnoCancelado() {
         return turnoCancelado;
@@ -26,7 +36,7 @@ public class MailNotificacionCancelarTurno extends Mail {
     }
 
     @Override
-    public String getMensaje(Turno t) {
+    public String getMensaje() {
         return MessageFormat.format(getEnv().getProperty("mailNotificacionCancelarTurno.cuerpo"),
                 FormatterFecha.crearStringDesdeLocalDate(turnoCancelado.getDia()),
                 FormatterHora.crearStringDesdeLocalTime(turnoCancelado.getHorario()));

@@ -17,24 +17,23 @@ import org.springframework.core.env.Environment;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class MailsServiceTest {
-    
-     @Mock
+
+    @Mock
     private Environment env;
 
     @InjectMocks
     private MailsService mailsService;
-    
+
     @Test
     @Ignore
-    public void mandarMailTest(){
+    public void mandarMailTest() {
         when(env.getProperty("direccionMail"))
                 .thenReturn("flavio.pietrolati@gmail.com");
         when(env.getProperty("clave"))
                 .thenReturn("soypitu1188jls");
-        
+
 //        mailsService.enviarMail();
-        
         Assert.assertTrue(true);
     }
-    
+
 }

@@ -10,6 +10,7 @@ import flpitu88.web.backend.psicoweb.config.ProveedorUsuarioRequestFilter;
 import flpitu88.web.backend.psicoweb.config.Secured;
 import flpitu88.web.backend.psicoweb.dtos.TurnoDTO;
 import flpitu88.web.backend.psicoweb.model.Turno;
+import flpitu88.web.backend.psicoweb.serviceapis.MailsAPI;
 import flpitu88.web.backend.psicoweb.serviceapis.TurnosAPI;
 import flpitu88.web.backend.psicoweb.utils.FormatterFecha;
 import flpitu88.web.backend.psicoweb.utils.FormatterHora;
@@ -21,6 +22,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
+import javax.mail.internet.AddressException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -40,32 +42,37 @@ import org.springframework.stereotype.Component;
 @Path("/turnos")
 @Component
 public class TurnosResource {
-    
+
     private final TurnosAPI turnosSrv;
-    
+
+    private final MailsAPI mailsSrv;
+
     private final ProveedorUsuarioRequestFilter proveedorUsuarioSrv;
-    
+
     private static final Logger logger
             = Logger.getLogger(TurnosResource.class.getName());
-    
+
     @Inject
-    public TurnosResource(TurnosAPI turnosSrv,
+    public TurnosResource(
+            TurnosAPI turnosSrv,
+            MailsAPI mailsSrv,
             ProveedorUsuarioRequestFilter proveedorUsuarioSrv) {
         this.turnosSrv = turnosSrv;
+        this.mailsSrv = mailsSrv;
         this.proveedorUsuarioSrv = proveedorUsuarioSrv;
     }
-    
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Secured
-    public void registrarTurno(TurnoDTO turnoBean) {
+    public void registrarTurno(TurnoDTO turnoBean) throws AddressException {
         String emailUser = proveedorUsuarioSrv.getEmailUsuario();
         turnosSrv.registrarTurno(turnoBean, emailUser);
         logger.log(Level.INFO,
                 "------ El usuario {0} registra un turno para el dia {1} en el horario {2} ---------",
                 new Object[]{emailUser, turnoBean.getDia(), turnoBean.getHora()});
     }
-    
+
     @GET
     @Path("/admin")
     @Produces(MediaType.APPLICATION_JSON)
@@ -81,7 +88,7 @@ public class TurnosResource {
         });
         return turnosBean;
     }
-    
+
     @GET
     @Path("/dias/disponibles")
     @Produces(MediaType.APPLICATION_JSON)
@@ -96,7 +103,7 @@ public class TurnosResource {
                         .add(FormatterFecha.crearStringDesdeLocalDate(t.getDia())));
         return diasTurnosDisponibles;
     }
-    
+
     @GET
     @Path("/horas/disponibles/{dia}/{mes}/{ano}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -119,14 +126,14 @@ public class TurnosResource {
                 t -> horasDeDiasDisponibles.add(FormatterHora.crearStringDesdeLocalTime(t.getHorario())));
         return horasDeDiasDisponibles;
     }
-    
+
     @PUT
     public void generarTurnosProximos() {
         logger.log(Level.INFO,
                 "------ Se solicita generar los nuevos turnos proximos ---------");
         turnosSrv.generarTurnosDisponibles();
     }
-    
+
     @GET
     @Secured
     @Produces(MediaType.APPLICATION_JSON)
@@ -140,7 +147,7 @@ public class TurnosResource {
         turnosModelo.forEach(t -> turnosBean.add(new TurnoDTO(t)));
         return turnosBean;
     }
-    
+
     @DELETE
     @Secured
     public void cancelarTurnoPorId(@QueryParam("id") Integer id) {
@@ -150,5 +157,5 @@ public class TurnosResource {
                 new Object[]{emailUser, id});
         turnosSrv.cancelarReservaDeTurno(id);
     }
-    
+
 }
