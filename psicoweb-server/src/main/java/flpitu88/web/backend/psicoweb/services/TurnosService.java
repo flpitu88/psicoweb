@@ -182,7 +182,7 @@ public class TurnosService implements TurnosAPI {
     public void cancelarReservaDeTurno(Integer idTurno) throws AddressException {
         Turno t = turnosDAO.getTurnoPorId(idTurno);
         List<String> destinatarios = Arrays.asList(
-                t.getUsuario().getMail(),
+                    t.getUsuario().getMail(),
                 mailsService.getMailDeAdministradora());
         t.setUsuario(null);
         turnosDAO.actualizarTurno(t);
