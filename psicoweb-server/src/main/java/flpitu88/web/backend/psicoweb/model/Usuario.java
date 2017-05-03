@@ -5,8 +5,6 @@
  */
 package flpitu88.web.backend.psicoweb.model;
 
-import flpitu88.web.backend.psicoweb.dtos.UsuarioDTO;
-import flpitu88.web.backend.psicoweb.utils.FormatterFecha;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -46,17 +44,6 @@ public class Usuario {
         this.fechaNacimiento = fechaNacimiento;
         this.administrador = administrador;
         this.password = password;
-    }
-
-    public Usuario(UsuarioDTO bean) {
-        this.dni = bean.getDni();
-        this.nombre = bean.getNombre();
-        this.apellido = bean.getApellido();
-        this.mail = bean.getEmail();
-        this.fechaNacimiento = FormatterFecha
-                .crearFechaNacimientoDesdeString(bean.getFechaNacimiento());
-        this.administrador = bean.getAdministrador();
-        this.password = bean.getPassword();
     }
 
     @Id

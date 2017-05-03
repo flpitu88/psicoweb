@@ -33,14 +33,6 @@ public class TurnoDTO {
         this.motivo = motivo;
     }
 
-    public TurnoDTO(Turno t) {
-        this.id = t.getId();
-        this.dia = FormatterFecha.crearStringDesdeLocalDateISO(t.getDia());
-        this.hora = FormatterHora.crearStringDesdeLocalTimeISO(t.getHorario());
-        this.usuario = (t.getUsuario() != null) ? t.getUsuario().getNombreCompleto() : "Disponible";
-        this.motivo = t.getMotivo();
-    }
-
     public Integer getId() {
         return id;
     }

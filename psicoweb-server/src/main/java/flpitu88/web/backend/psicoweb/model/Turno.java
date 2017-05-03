@@ -45,12 +45,6 @@ public class Turno {
         this.motivo = motivo;
     }
 
-    public Turno(TurnoDTO turnoBean, Usuario usuario) {
-        this.dia = FormatterFecha.crearFechaDesdeString(turnoBean.getDia());
-        this.horario = FormatterHora.crearHoraDesdeString(turnoBean.getHora());
-        this.usuario = usuario;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idTurno")

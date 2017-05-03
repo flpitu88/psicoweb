@@ -5,8 +5,6 @@
  */
 package flpitu88.web.backend.psicoweb.dtos;
 
-import flpitu88.web.backend.psicoweb.model.Usuario;
-import flpitu88.web.backend.psicoweb.utils.FormatterFecha;
 import java.io.Serializable;
 
 /**
@@ -35,16 +33,6 @@ public class UsuarioDTO implements Serializable {
         this.email = email;
         this.fechaNacimiento = fechaNacimiento;
         this.administrador = administrador;
-    }
-
-    public UsuarioDTO(Usuario user) {
-        this.dni = user.getDni();
-        this.nombre = user.getNombre();
-        this.apellido = user.getApellido();
-        this.email = user.getMail();
-        this.fechaNacimiento = FormatterFecha
-                .crearStringDesdeLocalDateISO(user.getFechaNacimiento());
-        this.administrador = user.getAdministrador();
     }
 
     public String getDni() {

@@ -9,6 +9,7 @@ import flpitu88.web.backend.psicoweb.config.AdminSecured;
 import flpitu88.web.backend.psicoweb.config.ProveedorUsuarioRequestFilter;
 import flpitu88.web.backend.psicoweb.config.Secured;
 import flpitu88.web.backend.psicoweb.dtos.TurnoDTO;
+import flpitu88.web.backend.psicoweb.factory.BeansFactory;
 import flpitu88.web.backend.psicoweb.model.Turno;
 import flpitu88.web.backend.psicoweb.serviceapis.MailsAPI;
 import flpitu88.web.backend.psicoweb.serviceapis.TurnosAPI;
@@ -46,6 +47,8 @@ public class TurnosResource {
     private final TurnosAPI turnosSrv;
 
     private final MailsAPI mailsSrv;
+    
+    private final BeansFactory factoryBeans;
 
     private final ProveedorUsuarioRequestFilter proveedorUsuarioSrv;
 
@@ -56,6 +59,7 @@ public class TurnosResource {
     public TurnosResource(
             TurnosAPI turnosSrv,
             MailsAPI mailsSrv,
+            BeansFactory factoryBeans,
             ProveedorUsuarioRequestFilter proveedorUsuarioSrv) {
         this.turnosSrv = turnosSrv;
         this.mailsSrv = mailsSrv;
@@ -83,7 +87,7 @@ public class TurnosResource {
         List<TurnoDTO> turnosBean = new ArrayList<>();
         List<Turno> turnos = turnosSrv.getTurnosRegistrados();
         turnos.stream().forEach((t) -> {
-            TurnoDTO bean = new TurnoDTO(t);
+            TurnoDTO bean = BeansFactory.convertirTurnoADTO(t);
             turnosBean.add(bean);
         });
         return turnosBean;
