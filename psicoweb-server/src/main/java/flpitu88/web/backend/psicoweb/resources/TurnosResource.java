@@ -150,7 +150,7 @@ public class TurnosResource {
 
     @DELETE
     @Secured
-    public void cancelarTurnoPorId(@QueryParam("id") Integer id) {
+    public void cancelarTurnoPorId(@QueryParam("id") Integer id) throws AddressException {
         String emailUser = proveedorUsuarioSrv.getEmailUsuario();
         logger.log(Level.INFO,
                 "------ El usuario {0} solicita cancelar su turno de id {1} ---------",
