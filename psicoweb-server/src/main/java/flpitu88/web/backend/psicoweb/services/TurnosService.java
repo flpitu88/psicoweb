@@ -7,7 +7,6 @@ package flpitu88.web.backend.psicoweb.services;
 
 import flpitu88.web.backend.psicoweb.dtos.TurnoDTO;
 import flpitu88.web.backend.psicoweb.model.Mail;
-import flpitu88.web.backend.psicoweb.model.MailNotificacionTurnoNuevo;
 import flpitu88.web.backend.psicoweb.model.Turno;
 import flpitu88.web.backend.psicoweb.model.Usuario;
 import flpitu88.web.backend.psicoweb.repository.MotivosConsultaDAO;
@@ -69,7 +68,7 @@ public class TurnosService implements TurnosAPI {
         buscado.setMotivo(tBean.getMotivo());
         turnosDAO.actualizarTurno(buscado);
         List<String> destinatarios = Arrays.asList(email, mailsService.getMailDeAdministradora());
-        Mail mailNuevoTurno = new MailNotificacionTurnoNuevo(buscado, destinatarios);
+        Mail mailNuevoTurno = mailsService.crearMailNotificacionNuevoTurno(buscado, destinatarios, env);
         mailsService.enviarMail(mailNuevoTurno);
     }
 
@@ -182,12 +181,12 @@ public class TurnosService implements TurnosAPI {
     public void cancelarReservaDeTurno(Integer idTurno) throws AddressException {
         Turno t = turnosDAO.getTurnoPorId(idTurno);
         List<String> destinatarios = Arrays.asList(
-                    t.getUsuario().getMail(),
+                t.getUsuario().getMail(),
                 mailsService.getMailDeAdministradora());
         t.setUsuario(null);
         turnosDAO.actualizarTurno(t);
-        Mail mailNuevoTurno = new MailNotificacionTurnoNuevo(t, destinatarios);
-        mailsService.enviarMail(mailNuevoTurno);
+        Mail mailCancelarTurno = mailsService.crearMailNotificacionCancelarTurno(t, destinatarios, env);
+        mailsService.enviarMail(mailCancelarTurno);
     }
 
 }

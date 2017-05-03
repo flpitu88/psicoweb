@@ -10,7 +10,7 @@ import flpitu88.web.backend.psicoweb.utils.FormatterHora;
 import java.text.MessageFormat;
 import java.util.List;
 import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
+import org.springframework.core.env.Environment;
 
 /**
  *
@@ -22,8 +22,9 @@ public class MailNotificacionCancelarTurno extends Mail {
 
     public MailNotificacionCancelarTurno(
             Turno turnoCancelado,
-            List<String> direccionesMail) throws AddressException {
-        super(direccionesMail);
+            List<String> direccionesMail,
+            Environment env) throws AddressException {
+        super(direccionesMail, env);
         this.turnoCancelado = turnoCancelado;
     }
 

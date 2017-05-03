@@ -11,6 +11,7 @@ import java.text.MessageFormat;
 import java.util.List;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import org.springframework.core.env.Environment;
 
 /**
  *
@@ -22,8 +23,9 @@ public class MailNotificacionTurnoNuevo extends Mail {
 
     public MailNotificacionTurnoNuevo(
             Turno turno,
-            List<String> direccionesMail) throws AddressException {
-        super(direccionesMail);
+            List<String> direccionesMail,
+            Environment env) throws AddressException {
+        super(direccionesMail, env);
         this.turnoNuevo = turno;
     }
 

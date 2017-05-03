@@ -6,7 +6,11 @@
 package flpitu88.web.backend.psicoweb.services;
 
 import flpitu88.web.backend.psicoweb.model.Mail;
+import flpitu88.web.backend.psicoweb.model.MailNotificacionCancelarTurno;
+import flpitu88.web.backend.psicoweb.model.MailNotificacionTurnoNuevo;
+import flpitu88.web.backend.psicoweb.model.Turno;
 import flpitu88.web.backend.psicoweb.serviceapis.MailsAPI;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,6 +19,7 @@ import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +85,21 @@ public class MailsService implements MailsAPI {
     @Override
     public String getMailDeAdministradora() {
         return env.getProperty("direccionMail");
+    }
+
+    @Override
+    public MailNotificacionCancelarTurno crearMailNotificacionCancelarTurno(
+            Turno turnoCancelado,
+            List<String> direccionesMail,
+            Environment env) throws AddressException {
+        return new MailNotificacionCancelarTurno(turnoCancelado, direccionesMail, env);
+    }
+
+    @Override
+    public MailNotificacionTurnoNuevo crearMailNotificacionNuevoTurno(Turno turnoCancelado,
+            List<String> direccionesMail,
+            Environment env) throws AddressException {
+        return new MailNotificacionTurnoNuevo(turnoCancelado, direccionesMail, env);
     }
 
 }
