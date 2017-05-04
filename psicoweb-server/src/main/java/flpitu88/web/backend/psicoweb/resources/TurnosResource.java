@@ -47,8 +47,6 @@ public class TurnosResource {
     private final TurnosAPI turnosSrv;
 
     private final MailsAPI mailsSrv;
-    
-    private final BeansFactory factoryBeans;
 
     private final ProveedorUsuarioRequestFilter proveedorUsuarioSrv;
 
@@ -59,7 +57,6 @@ public class TurnosResource {
     public TurnosResource(
             TurnosAPI turnosSrv,
             MailsAPI mailsSrv,
-            BeansFactory factoryBeans,
             ProveedorUsuarioRequestFilter proveedorUsuarioSrv) {
         this.turnosSrv = turnosSrv;
         this.mailsSrv = mailsSrv;
@@ -148,7 +145,8 @@ public class TurnosResource {
                 emailUser);
         List<Turno> turnosModelo = turnosSrv.getTurnosDelUsuario(emailUser);
         List<TurnoDTO> turnosBean = new ArrayList<>();
-        turnosModelo.forEach(t -> turnosBean.add(new TurnoDTO(t)));
+        turnosModelo.forEach(t -> turnosBean.add(
+                BeansFactory.convertirTurnoADTO(t)));
         return turnosBean;
     }
 

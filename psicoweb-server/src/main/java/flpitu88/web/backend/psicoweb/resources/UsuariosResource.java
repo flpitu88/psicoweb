@@ -6,6 +6,7 @@
 package flpitu88.web.backend.psicoweb.resources;
 
 import flpitu88.web.backend.psicoweb.dtos.UsuarioDTO;
+import flpitu88.web.backend.psicoweb.factory.BeansFactory;
 import flpitu88.web.backend.psicoweb.model.Usuario;
 import flpitu88.web.backend.psicoweb.serviceapis.UsuariosAPI;
 import java.util.logging.Level;
@@ -41,7 +42,7 @@ public class UsuariosResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public void guardarUsuario(UsuarioDTO bean) {
 
-        Usuario usuario = new Usuario(bean);
+        Usuario usuario = BeansFactory.convertirDTOAUsuario(bean);
         usuarioSrv.guardarUsuario(usuario);
 
         logger.log(Level.INFO,
