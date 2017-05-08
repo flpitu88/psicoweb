@@ -57,7 +57,7 @@ public class TurnosServiceTest {
     private TurnosService turnosService;
 
     @Test
-    public void registrarTurnoOkTest() throws AddressException {
+    public void registrarTurnoOkTest() throws AddressException, Exception {
         MotivoConsulta motivo = new MotivoConsulta(1, "tenia ganas");
         String emailUsuario = "mail@usuario.com";
         TurnoDTO turnoDTO = new TurnoDTO(1, "10/12/2010", "14:00", "Disponible", motivo);
@@ -98,7 +98,7 @@ public class TurnosServiceTest {
     }
 
     @Test
-    public void registrarTurnoNuevoMotivoOkTest() throws AddressException {
+    public void registrarTurnoNuevoMotivoOkTest() throws AddressException, Exception {
         MotivoConsulta motivo = new MotivoConsulta(null, "tenia ganas");
         String emailUsuario = "mail@usuario.com";
         TurnoDTO turnoDTO = new TurnoDTO(1, "10/12/2010", "14:00", "Disponible", motivo);
@@ -142,7 +142,7 @@ public class TurnosServiceTest {
     }
 
     @Test
-    public void cancelarTurnoOkTest() throws AddressException {
+    public void cancelarTurnoOkTest() throws AddressException, Exception {
 
         Usuario usuario = new Usuario();
         usuario.setMail("mail@usuario.com");

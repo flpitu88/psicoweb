@@ -6,20 +6,14 @@
 package flpitu88.web.backend.psicoweb.services;
 
 import flpitu88.web.backend.psicoweb.model.Mail;
-import flpitu88.web.backend.psicoweb.model.MailNotificacionCancelarTurno;
-import flpitu88.web.backend.psicoweb.model.MailNotificacionTurnoNuevo;
-import flpitu88.web.backend.psicoweb.model.Turno;
 import flpitu88.web.backend.psicoweb.serviceapis.MailsAPI;
-import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +36,7 @@ public class MailsService implements MailsAPI {
             = Logger.getLogger(MailsService.class.getName());
 
     @Override
-    public void enviarMail(Mail mail) {
+    public void enviarMail(Mail mail) throws Exception {
         final String username = env.getProperty("direccionMail");
         final String password = env.getProperty("clave");
 
@@ -60,46 +54,24 @@ public class MailsService implements MailsAPI {
             }
         });
 
-        try {
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(username));
-            message.setRecipients(
-                    Message.RecipientType.TO,
-                    mail.getDestinatarios());
-            message.setSubject(mail.getAsunto());
-            message.setText(mail.getMensaje());
+        Message message = new MimeMessage(session);
+        message.setFrom(new InternetAddress(username));
+        message.setRecipients(
+                Message.RecipientType.TO,
+                mail.getDestinatarios());
+        message.setSubject(mail.getAsunto());
+        message.setText(mail.getMensaje());
 
-            Transport.send(message);
+        Transport.send(message);
 
-            logger.log(Level.INFO,
-                    "Notificacion {0} enviada a la direccion {1}",
-                    new Object[]{mail.getClass().getSimpleName(), mail.getDestinatarios()});
-        } catch (MessagingException e) {
-            logger.log(Level.SEVERE,
-                    "######### ERROR: Al enviar Notificacion {0} a la direccion {1}",
-                    new Object[]{mail.getClass().getSimpleName(), mail.getDestinatarios()});
-            throw new RuntimeException(e);
-        }
+        logger.log(Level.INFO,
+                "Notificacion {0} enviada a la direccion {1}",
+                new Object[]{mail.getClass().getSimpleName(), mail.getDestinatarios()});
     }
 
     @Override
     public String getMailDeAdministradora() {
         return env.getProperty("direccionMail");
-    }
-
-    @Override
-    public MailNotificacionCancelarTurno crearMailNotificacionCancelarTurno(
-            Turno turnoCancelado,
-            List<String> direccionesMail,
-            Environment env) throws AddressException {
-        return new MailNotificacionCancelarTurno(turnoCancelado, direccionesMail, env);
-    }
-
-    @Override
-    public MailNotificacionTurnoNuevo crearMailNotificacionNuevoTurno(Turno turnoCancelado,
-            List<String> direccionesMail,
-            Environment env) throws AddressException {
-        return new MailNotificacionTurnoNuevo(turnoCancelado, direccionesMail, env);
     }
 
 }
