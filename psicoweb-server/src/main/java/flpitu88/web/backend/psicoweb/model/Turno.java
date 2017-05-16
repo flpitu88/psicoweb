@@ -5,9 +5,6 @@
  */
 package flpitu88.web.backend.psicoweb.model;
 
-import flpitu88.web.backend.psicoweb.dtos.TurnoDTO;
-import flpitu88.web.backend.psicoweb.utils.FormatterFecha;
-import flpitu88.web.backend.psicoweb.utils.FormatterHora;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import javax.persistence.Column;

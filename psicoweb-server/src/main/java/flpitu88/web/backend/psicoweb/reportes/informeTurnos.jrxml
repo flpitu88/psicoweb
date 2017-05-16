@@ -1,29 +1,200 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD JasperReport//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
-
-<jasperReport name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-    <background>
-        <band/>
-    </background>
-    <title>
-        <band height="79"/>
-    </title>
-    <pageHeader>
-        <band height="35"/>
-    </pageHeader>
-    <columnHeader>
-        <band height="61"/>
-    </columnHeader>
-    <detail>
-        <band height="125"/>
-    </detail>
-    <columnFooter>
-        <band height="45"/>
-    </columnFooter>
-    <pageFooter>
-        <band height="54"/>
-    </pageFooter>
-    <summary>
-        <band height="42"/>
-    </summary>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ba311ff6-70f6-4fd9-b37a-b6ec31ff4f28">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="6"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fechaDesde" class="java.lang.String"/>
+	<parameter name="fechaHasta" class="java.lang.String"/>
+	<parameter name="paciente" class="java.lang.String"/>
+	<parameter name="pago" class="java.lang.String"/>
+	<field name="fecha" class="java.lang.String"/>
+	<field name="hora" class="java.lang.String"/>
+	<field name="paciente" class="java.lang.String"/>
+	<field name="motivo" class="java.lang.String"/>
+	<field name="pago" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="15" y="2" width="100" height="76" uuid="182680d2-af4d-4654-9cd9-32587ec529d6"/>
+				<imageExpression><![CDATA["/home/flpitu88/NetBeansProjects/psicoweb/psicoweb-server/src/main/webapp/images/logo3D.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="149" y="24" width="269" height="37" uuid="ec2d8dbb-1c75-4b1d-8aaf-59cafdbf02b7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Turnos Registrados]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="100" splitType="Stretch">
+			<rectangle>
+				<reportElement x="15" y="31" width="529" height="53" uuid="f6ca192e-6dd9-464d-8035-ef05ab0ffb38"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="15" y="11" width="100" height="20" uuid="34432e0a-2d78-419d-ae34-ea3f07c79a94"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="21" y="15" width="77" height="16" uuid="f65c51f6-8581-40aa-a39f-b9803d675da2"/>
+				<textElement>
+					<font size="12" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Filtro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="21" y="38" width="101" height="20" uuid="9c7331dc-c905-4f7a-9905-52ac7bdaa783"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[Fecha desde:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="21" y="61" width="101" height="20" uuid="7876549e-f5db-46da-a6ee-a4a15a2114db"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[Fecha hasta:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="38" width="101" height="20" uuid="46df6783-6cc1-419d-b2cd-ae2a25ddc1cf"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[Paciente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="61" width="101" height="20" uuid="13c7edf3-5763-4b68-ac7f-7f9f3921f34c"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[Pago:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="132" y="38" width="133" height="20" uuid="f752edc1-8607-4699-b18e-3df890802385"/>
+				<textElement verticalAlignment="Middle">
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechaDesde}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="132" y="61" width="133" height="20" uuid="e5302dff-d049-477f-a6c9-745ce1e71957"/>
+				<textElement verticalAlignment="Middle">
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechaHasta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="393" y="38" width="139" height="20" uuid="99e7f336-40a8-42f3-bf3f-1ff1de377925"/>
+				<textElement verticalAlignment="Middle">
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{paciente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="393" y="61" width="139" height="20" uuid="6d66f691-2944-431d-af65-6c0f534bacd7"/>
+				<textElement verticalAlignment="Middle">
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pago}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="37" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="37" backcolor="#CCCCCC" uuid="5ac6ccd7-5084-416d-b56f-f35c0bcce8b3"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="7" y="10" width="65" height="20" uuid="0a6eabc0-7856-430d-aeec-cccec4de683e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="10" width="69" height="20" uuid="97279d60-df2d-4409-92a9-42b0845a19b7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="157" y="10" width="145" height="20" uuid="50a46948-fdac-417c-b267-6aa8b81b6f59"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Paciente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="313" y="10" width="191" height="20" uuid="11ec6ac6-4a17-42af-88a3-021d4639937c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Motivo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="512" y="10" width="36" height="20" uuid="a728c6b0-06b5-47d1-99b6-23f4ed80b58a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pago]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="36" splitType="Stretch">
+			<textField>
+				<reportElement x="7" y="8" width="65" height="20" uuid="3368dbfb-df08-4c6e-8e2e-e72d6bfcd58d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="8" width="69" height="20" uuid="3fbca03b-c6cd-43cd-8296-43c2ae96f927"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{hora}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="157" y="8" width="145" height="20" uuid="a1859bf3-9565-46bd-9731-bd893932d73a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{paciente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="313" y="8" width="191" height="20" uuid="316752fb-d5c0-47ca-82cc-1cab288cd8c5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{motivo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="512" y="8" width="36" height="20" uuid="135a1862-b1f9-4586-b051-8e957ca54310"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{pago}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="19" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="10" width="555" height="1" uuid="f6c0a33d-e927-4c7e-a02d-e6e69c3e501b"/>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="40" splitType="Stretch">
+			<textField>
+				<reportElement x="417" y="6" width="94" height="20" uuid="e908e320-0424-4a26-9089-15049a782c63"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="512" y="6" width="40" height="20" uuid="be7591ee-f31a-4d02-890e-aaa70c7fe54f"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="4" width="179" height="30" uuid="7cb75100-7d8e-4dfe-9518-25421a3ce91f"/>
+				<textElement verticalAlignment="Middle">
+					<font isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Evaluaciones Neuropsicológicas
+Lic. Alexandra Pagiatis]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="13" splitType="Stretch"/>
+	</summary>
 </jasperReport>

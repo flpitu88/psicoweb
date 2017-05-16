@@ -11,7 +11,6 @@ import flpitu88.web.backend.psicoweb.config.Secured;
 import flpitu88.web.backend.psicoweb.dtos.TurnoDTO;
 import flpitu88.web.backend.psicoweb.factory.BeansFactory;
 import flpitu88.web.backend.psicoweb.model.Turno;
-import flpitu88.web.backend.psicoweb.serviceapis.MailsAPI;
 import flpitu88.web.backend.psicoweb.serviceapis.TurnosAPI;
 import flpitu88.web.backend.psicoweb.utils.FormatterFecha;
 import flpitu88.web.backend.psicoweb.utils.FormatterHora;
@@ -46,8 +45,6 @@ public class TurnosResource {
 
     private final TurnosAPI turnosSrv;
 
-    private final MailsAPI mailsSrv;
-
     private final ProveedorUsuarioRequestFilter proveedorUsuarioSrv;
 
     private static final Logger logger
@@ -56,10 +53,8 @@ public class TurnosResource {
     @Inject
     public TurnosResource(
             TurnosAPI turnosSrv,
-            MailsAPI mailsSrv,
             ProveedorUsuarioRequestFilter proveedorUsuarioSrv) {
         this.turnosSrv = turnosSrv;
-        this.mailsSrv = mailsSrv;
         this.proveedorUsuarioSrv = proveedorUsuarioSrv;
     }
 
@@ -72,22 +67,6 @@ public class TurnosResource {
         logger.log(Level.INFO,
                 "------ El usuario {0} registra un turno para el dia {1} en el horario {2} ---------",
                 new Object[]{emailUser, turnoBean.getDia(), turnoBean.getHora()});
-    }
-
-    @GET
-    @Path("/admin")
-    @Produces(MediaType.APPLICATION_JSON)
-    @AdminSecured
-    public List<TurnoDTO> getTurnosRegistrados() {
-        logger.log(Level.INFO,
-                "------ El administrador solicita conocer los turnos registrados ---------");
-        List<TurnoDTO> turnosBean = new ArrayList<>();
-        List<Turno> turnos = turnosSrv.getTurnosRegistrados();
-        turnos.stream().forEach((t) -> {
-            TurnoDTO bean = BeansFactory.convertirTurnoADTO(t);
-            turnosBean.add(bean);
-        });
-        return turnosBean;
     }
 
     @GET
@@ -159,5 +138,4 @@ public class TurnosResource {
                 new Object[]{emailUser, id});
         turnosSrv.cancelarReservaDeTurno(id);
     }
-
 }

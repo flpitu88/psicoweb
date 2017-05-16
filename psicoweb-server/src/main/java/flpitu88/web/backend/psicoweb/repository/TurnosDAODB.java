@@ -5,10 +5,12 @@
  */
 package flpitu88.web.backend.psicoweb.repository;
 
+import flpitu88.web.backend.psicoweb.dtos.FiltroInforme;
 import flpitu88.web.backend.psicoweb.model.Turno;
 import flpitu88.web.backend.psicoweb.model.Usuario;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,5 +86,43 @@ public class TurnosDAODB implements TurnosDAO {
                 .createQuery("from Turno t where t.id = :id")
                 .setParameter("id", id)
                 .uniqueResult();
+    }
+
+    @Override
+    public List<Turno> getTurnosConFiltro(FiltroInforme filtro) {
+        String query = "from Turno t ";
+        Map<String, Object> mapaValores = filtro.getMapa();
+
+        LocalDate fechaDesde = (LocalDate) mapaValores.get("fechaDesde");
+        LocalDate fechaHasta = (LocalDate) mapaValores.get("fechaHasta");
+        String paciente = (String) mapaValores.get("paciente");
+
+        if (fechaDesde != null || fechaHasta != null || paciente != null) {
+            query += "where ";
+            int i = 0;
+
+            if (fechaDesde != null) {
+                query += "t.dia > :fechaDesde";
+                i++;
+            }
+            if (fechaHasta != null) {
+                if (i > 0) {
+                    query += " and ";
+                }
+                query += "t.dia < :fechaHasta";
+                i++;
+            }
+            if (paciente != null) {
+                if (i > 0) {
+                    query += " and ";
+                }
+                query += "t.usuario.id = :paciente";
+            }
+        }
+
+        query += " order by t.id";
+
+        return sessionFactory.getCurrentSession().createQuery(query)
+                .list();
     }
 }
