@@ -13,7 +13,7 @@ public class ItemTurno {
 
     private String fecha;
     private String hora;
-    private String nombrePaciente;
+    private String paciente;
     private String motivo;
     private String pago;
 
@@ -24,7 +24,7 @@ public class ItemTurno {
             String motivo, String pago) {
         this.fecha = fecha;
         this.hora = hora;
-        this.nombrePaciente = nombrePaciente;
+        this.paciente = nombrePaciente;
         this.motivo = motivo;
         this.pago = pago;
     }
@@ -45,12 +45,12 @@ public class ItemTurno {
         this.hora = hora;
     }
 
-    public String getNombrePaciente() {
-        return nombrePaciente;
+    public String getPaciente() {
+        return paciente;
     }
 
-    public void setNombrePaciente(String nombrePaciente) {
-        this.nombrePaciente = nombrePaciente;
+    public void setPaciente(String paciente) {
+        this.paciente = paciente;
     }
 
     public String getMotivo() {

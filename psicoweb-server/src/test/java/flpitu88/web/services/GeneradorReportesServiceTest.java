@@ -17,7 +17,6 @@ import java.time.LocalTime;
 import java.util.Arrays;
 import net.sf.jasperreports.engine.JRException;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -47,7 +46,6 @@ public class GeneradorReportesServiceTest {
     private GeneradorInformeService generadorReporteService;
 
     @Test
-    @Ignore
     public void generarInformeTest() throws JRException {
         FiltroInforme filtro = new FiltroInforme();
         filtro.getMapa().put("fechaDesde", LocalDate.now().minusDays(5));
@@ -56,18 +54,22 @@ public class GeneradorReportesServiceTest {
 
         Usuario usuario1 = new Usuario();
         usuario1.setId(1);
+        usuario1.setNombre("Luis");
+        usuario1.setApellido("Lopez");
         MotivoConsulta motivo1 = new MotivoConsulta(1, "Motivo1");
         Turno turno1 = new Turno(1, LocalDate.now(), LocalTime.now(), usuario1, motivo1);
 
         Usuario usuario2 = new Usuario();
-        usuario1.setId(2);
+        usuario2.setId(2);
+        usuario2.setNombre("Roberto");
+        usuario2.setApellido("Perez");
         MotivoConsulta motivo2 = new MotivoConsulta(2, "Motivo2");
         Turno turno2 = new Turno(2, LocalDate.now(), LocalTime.now(), usuario2, motivo2);
 
         when(env.getProperty(eq("pathJasper")))
-                .thenReturn("/home/flavio");
+                .thenReturn("/home/flavio/NetBeansProjects/psicoweb/psicoweb-server/src/main/java/flpitu88/web/backend/psicoweb/reportes/");
         when(env.getProperty(eq("pathDestino")))
-                .thenReturn("/home/flavio");
+                .thenReturn("/home/flavio/informes");
         when(turnosDAO.getTurnosConFiltro(filtro))
                 .thenReturn(Arrays.asList(turno1, turno2));
         when(usuariosDAO.getUsuarioById(eq(1)))

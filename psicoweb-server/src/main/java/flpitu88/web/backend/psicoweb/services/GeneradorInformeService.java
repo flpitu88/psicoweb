@@ -57,12 +57,10 @@ public class GeneradorInformeService implements GeneradorInformeAPI {
         JasperReport report = JasperCompileManager
                 .compileReport(env.getProperty("pathJasper") + "informeTurnos.jrxml");
 
-        JRBeanCollectionDataSource datos
-                = new JRBeanCollectionDataSource(modeloInforme.getItems());
-
         JasperPrint print = JasperFillManager.fillReport(
-                report, modeloInforme.getParametros(), datos);
-        JasperExportManager.exportReportToPdfFile(print, env.getProperty("pathDestino") + "/informe.pdf");
+                report, modeloInforme.getParametros(),
+                new JRBeanCollectionDataSource(modeloInforme.getItems()));
+//        JasperExportManager.exportReportToPdfFile(print, env.getProperty("pathDestino") + "/informe.pdf");
         return JasperExportManager.exportReportToPdf(print);
     }
 
