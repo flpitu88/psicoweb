@@ -22,6 +22,7 @@
         <junit.version>4.12</junit.version>
         <jacoco.version>0.7.7.201606060606</jacoco.version>
         <jasper.version>6.2.2</jasper.version>
+        <jackson.version>2.8.7</jackson.version>
     </properties>
     
     <dependencies>
@@ -48,6 +49,22 @@
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-json-jackson</artifactId>
             <version>${jersey.version}</version>
+        </dependency>
+        <!--JACKSON-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
         
         <!--SPRING TRANSACTION-->

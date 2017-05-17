@@ -38,13 +38,16 @@ app.config(['$locationProvider', '$routeProvider', '$authProvider', function ($l
                     templateUrl: 'views/gestionTurnos.html',
                     controller: 'GestionTurnosController'
                 })
+                .when('/administrarTurnos', {
+                    templateUrl: 'views/administrarTurnos.html',
+                    controller: 'AdministrarTurnosController'
+                })
 
                 .otherwise({redirectTo: '/home'});
 
         $authProvider.loginUrl = "psicoweb-server/rest/autenticacion";
         $authProvider.signupUrl = "psicoweb-server/rest/usuarios";
         $authProvider.tokenName = "token";
-//        $authProvider.tokenPrefix = "pwt";
         $authProvider.tokenHeader = 'Authorization';
         $authProvider.tokenType = 'Bearer';
         $authProvider.storageType = 'localStorage';
