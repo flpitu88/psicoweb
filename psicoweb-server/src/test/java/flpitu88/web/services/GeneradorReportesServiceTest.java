@@ -67,9 +67,7 @@ public class GeneradorReportesServiceTest {
         Turno turno2 = new Turno(2, LocalDate.now(), LocalTime.now(), usuario2, motivo2);
 
         when(env.getProperty(eq("pathJasper")))
-                .thenReturn("/home/flavio/NetBeansProjects/psicoweb/psicoweb-server/src/main/java/flpitu88/web/backend/psicoweb/reportes/");
-        when(env.getProperty(eq("pathDestino")))
-                .thenReturn("/home/flavio/informes");
+                .thenReturn("src/main/java/flpitu88/web/backend/psicoweb/reportes/");
         when(turnosDAO.getTurnosConFiltro(filtro))
                 .thenReturn(Arrays.asList(turno1, turno2));
         when(usuariosDAO.getUsuarioById(eq(1)))

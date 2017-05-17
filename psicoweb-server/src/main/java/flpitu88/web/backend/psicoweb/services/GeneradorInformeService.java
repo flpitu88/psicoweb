@@ -60,7 +60,6 @@ public class GeneradorInformeService implements GeneradorInformeAPI {
         JasperPrint print = JasperFillManager.fillReport(
                 report, modeloInforme.getParametros(),
                 new JRBeanCollectionDataSource(modeloInforme.getItems()));
-//        JasperExportManager.exportReportToPdfFile(print, env.getProperty("pathDestino") + "/informe.pdf");
         return JasperExportManager.exportReportToPdf(print);
     }
 

@@ -19,7 +19,7 @@
 		<band height="79" splitType="Stretch">
 			<image>
 				<reportElement x="15" y="2" width="100" height="76" uuid="182680d2-af4d-4654-9cd9-32587ec529d6"/>
-				<imageExpression><![CDATA["/home/flavio/NetBeansProjects/psicoweb/psicoweb-server/src/main/webapp/images/logo3D.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["src/main/webapp/images/logo3D.jpg"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="149" y="24" width="269" height="37" uuid="ec2d8dbb-1c75-4b1d-8aaf-59cafdbf02b7"/>
