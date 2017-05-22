@@ -5,7 +5,7 @@
  */
 package flpitu88.web.backend.psicoweb.serviceapis;
 
-import flpitu88.web.backend.psicoweb.dtos.FiltroInforme;
+import flpitu88.web.backend.psicoweb.dtos.FiltroTurnos;
 import net.sf.jasperreports.engine.JRException;
 
 /**
@@ -14,5 +14,5 @@ import net.sf.jasperreports.engine.JRException;
  */
 public interface GeneradorInformeAPI {
 
-    public byte[] generarInformeDeTurnosPDF(FiltroInforme filtro) throws JRException;
+    public byte[] generarInformeDeTurnosPDF(FiltroTurnos filtro) throws JRException;
 }

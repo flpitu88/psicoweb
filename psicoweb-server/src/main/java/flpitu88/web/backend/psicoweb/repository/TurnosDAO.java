@@ -5,7 +5,7 @@
  */
 package flpitu88.web.backend.psicoweb.repository;
 
-import flpitu88.web.backend.psicoweb.dtos.FiltroInforme;
+import flpitu88.web.backend.psicoweb.dtos.FiltroTurnos;
 import flpitu88.web.backend.psicoweb.model.Turno;
 import flpitu88.web.backend.psicoweb.model.Usuario;
 import java.time.LocalDate;
@@ -33,5 +33,5 @@ public interface TurnosDAO {
 
     public Turno getTurnoPorId(Integer id);
     
-    public List<Turno> getTurnosConFiltro(FiltroInforme filtro);
+    public List<Turno> getTurnosConFiltro(FiltroTurnos filtro);
 }

@@ -5,7 +5,7 @@
  */
 package flpitu88.web.backend.psicoweb.services;
 
-import flpitu88.web.backend.psicoweb.dtos.FiltroInforme;
+import flpitu88.web.backend.psicoweb.dtos.FiltroTurnos;
 import flpitu88.web.backend.psicoweb.model.Turno;
 import flpitu88.web.backend.psicoweb.reportes.ItemTurno;
 import flpitu88.web.backend.psicoweb.reportes.ModeloInforme;
@@ -51,7 +51,7 @@ public class GeneradorInformeService implements GeneradorInformeAPI {
 
     @Override
     @Transactional(readOnly = true)
-    public byte[] generarInformeDeTurnosPDF(FiltroInforme filtro) throws JRException {
+    public byte[] generarInformeDeTurnosPDF(FiltroTurnos filtro) throws JRException {
         ModeloInforme modeloInforme = generarModeloParaInforme(filtro);
 
         JasperReport report = JasperCompileManager
@@ -63,7 +63,7 @@ public class GeneradorInformeService implements GeneradorInformeAPI {
         return JasperExportManager.exportReportToPdf(print);
     }
 
-    private ModeloInforme generarModeloParaInforme(FiltroInforme filtro) {
+    private ModeloInforme generarModeloParaInforme(FiltroTurnos filtro) {
         List<Turno> turnosInforme = turnosDAO.getTurnosConFiltro(filtro);
 
         // Creo cada item del informe de turnos

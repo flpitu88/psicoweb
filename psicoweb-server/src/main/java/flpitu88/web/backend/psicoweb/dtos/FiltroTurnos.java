@@ -12,15 +12,15 @@ import java.util.Map;
  *
  * @author flpitu88
  */
-public class FiltroInforme {
+public class FiltroTurnos {
 
     private Map<String, Object> mapa;
 
-    public FiltroInforme() {
+    public FiltroTurnos() {
         mapa = new HashMap<>();
     }
 
-    public FiltroInforme(Map<String, Object> mapa) {
+    public FiltroTurnos(Map<String, Object> mapa) {
         this.mapa = mapa;
     }
 

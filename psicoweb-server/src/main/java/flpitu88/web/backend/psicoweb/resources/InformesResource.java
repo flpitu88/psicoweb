@@ -7,7 +7,7 @@ package flpitu88.web.backend.psicoweb.resources;
 
 import flpitu88.web.backend.psicoweb.config.AdminSecured;
 import flpitu88.web.backend.psicoweb.config.ProveedorUsuarioRequestFilter;
-import flpitu88.web.backend.psicoweb.dtos.FiltroInforme;
+import flpitu88.web.backend.psicoweb.dtos.FiltroTurnos;
 import flpitu88.web.backend.psicoweb.serviceapis.GeneradorInformeAPI;
 import java.io.IOException;
 import java.util.Base64;
@@ -49,7 +49,7 @@ public class InformesResource {
     @GET
     @AdminSecured
     @Produces("application/pdf")
-    public Response obtenerInformeConFiltro(FiltroInforme filtro) {
+    public Response obtenerInformeConFiltro(FiltroTurnos filtro) {
         String username = proveedorSrv.getEmailUsuario();
         logger.log(Level.INFO, "############## El usuario {0} solicita un informe de turnos ##############", username);
         try {

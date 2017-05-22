@@ -5,6 +5,7 @@
  */
 package flpitu88.web.backend.psicoweb.serviceapis;
 
+import flpitu88.web.backend.psicoweb.dtos.FiltroTurnos;
 import flpitu88.web.backend.psicoweb.dtos.TurnoDTO;
 import flpitu88.web.backend.psicoweb.model.Turno;
 import java.time.LocalDate;
@@ -30,4 +31,6 @@ public interface TurnosAPI {
     public List<Turno> getTurnosDelUsuario(String mailUsuario);
 
     public void cancelarReservaDeTurno(Integer idTurno) throws AddressException;
+    
+    public List<Turno> getTurnosConFiltro(FiltroTurnos filtro);
 }

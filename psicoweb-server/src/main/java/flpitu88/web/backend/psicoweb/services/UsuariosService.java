@@ -37,8 +37,8 @@ public class UsuariosService implements UsuariosAPI {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Usuario> getUsuarios() {
-        return usuariosDAO.getUsuarios();
+    public List<Usuario> getUsuariosNoAdministradores() {
+        return usuariosDAO.getUsuariosNoAdministradores();
     }
 
 }

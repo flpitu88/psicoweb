@@ -5,6 +5,7 @@
  */
 package flpitu88.web.backend.psicoweb.services;
 
+import flpitu88.web.backend.psicoweb.dtos.FiltroTurnos;
 import flpitu88.web.backend.psicoweb.dtos.TurnoDTO;
 import flpitu88.web.backend.psicoweb.factory.BeansFactory;
 import flpitu88.web.backend.psicoweb.factory.MailsFactory;
@@ -210,6 +211,11 @@ public class TurnosService implements TurnosAPI {
                         mailCancelarTurno.getClass().getSimpleName(),
                         mailCancelarTurno.getDestinatarios()});
         }
+    }
+
+    @Override
+    public List<Turno> getTurnosConFiltro(FiltroTurnos filtro) {
+        return turnosDAO.getTurnosConFiltro(filtro);
     }
 
 }

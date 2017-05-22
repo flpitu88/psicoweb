@@ -18,7 +18,7 @@ public interface UsuariosDAO {
     
     public Usuario getUsuarioById(Integer id);
     
-    public List<Usuario> getUsuarios();
+    public List<Usuario> getUsuariosNoAdministradores();
     
     public Usuario getUsuarioByMail(String email);
     

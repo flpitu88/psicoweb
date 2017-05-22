@@ -61,6 +61,7 @@ public class BeansFactory {
 
     public static UsuarioDTO convertirUsuarioADTO(Usuario user) {
         UsuarioDTO usuarioDTO = new UsuarioDTO(
+                user.getId(),
                 user.getDni(),
                 user.getNombre(),
                 user.getApellido(),

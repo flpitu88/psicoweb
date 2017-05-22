@@ -5,7 +5,7 @@
  */
 package flpitu88.web.services;
 
-import flpitu88.web.backend.psicoweb.dtos.FiltroInforme;
+import flpitu88.web.backend.psicoweb.dtos.FiltroTurnos;
 import flpitu88.web.backend.psicoweb.model.MotivoConsulta;
 import flpitu88.web.backend.psicoweb.model.Turno;
 import flpitu88.web.backend.psicoweb.model.Usuario;
@@ -47,7 +47,7 @@ public class GeneradorReportesServiceTest {
 
     @Test
     public void generarInformeTest() throws JRException {
-        FiltroInforme filtro = new FiltroInforme();
+        FiltroTurnos filtro = new FiltroTurnos();
         filtro.getMapa().put("fechaDesde", LocalDate.now().minusDays(5));
         filtro.getMapa().put("fechaHasta", LocalDate.now().plusDays(2));
         filtro.getMapa().put("paciente", 1);

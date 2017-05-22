@@ -13,6 +13,7 @@ import java.io.Serializable;
  */
 public class UsuarioDTO implements Serializable {
 
+    private Integer id;
     private String dni;
     private String nombre;
     private String apellido;
@@ -24,8 +25,9 @@ public class UsuarioDTO implements Serializable {
     public UsuarioDTO() {
     }
 
-    public UsuarioDTO(String dni, String nombre, String apellido, String password,
+    public UsuarioDTO(Integer id, String dni, String nombre, String apellido, String password,
             String email, String fechaNacimiento, Boolean administrador) {
+        this.id = id;
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -33,6 +35,14 @@ public class UsuarioDTO implements Serializable {
         this.email = email;
         this.fechaNacimiento = fechaNacimiento;
         this.administrador = administrador;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getDni() {

@@ -39,9 +39,9 @@ public class UsuariosDAODB implements UsuariosDAO {
     }
 
     @Override
-    public List<Usuario> getUsuarios() {
+    public List<Usuario> getUsuariosNoAdministradores() {
         return sessionFactory.getCurrentSession()
-                .createQuery("from Usuario")
+                .createQuery("from Usuario u where u.administrador = false")
                 .list();
     }
 

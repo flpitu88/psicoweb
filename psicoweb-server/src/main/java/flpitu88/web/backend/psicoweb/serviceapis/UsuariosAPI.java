@@ -18,6 +18,6 @@ public interface UsuariosAPI {
 
     public Usuario getUsuarioById(Integer id);
 
-    public List<Usuario> getUsuarios();
+    public List<Usuario> getUsuariosNoAdministradores();
 
 }

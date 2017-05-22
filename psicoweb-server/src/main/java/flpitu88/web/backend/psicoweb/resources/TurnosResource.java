@@ -8,6 +8,7 @@ package flpitu88.web.backend.psicoweb.resources;
 import flpitu88.web.backend.psicoweb.config.AdminSecured;
 import flpitu88.web.backend.psicoweb.config.ProveedorUsuarioRequestFilter;
 import flpitu88.web.backend.psicoweb.config.Secured;
+import flpitu88.web.backend.psicoweb.dtos.FiltroTurnos;
 import flpitu88.web.backend.psicoweb.dtos.TurnoDTO;
 import flpitu88.web.backend.psicoweb.factory.BeansFactory;
 import flpitu88.web.backend.psicoweb.model.Turno;
@@ -137,5 +138,19 @@ public class TurnosResource {
                 "------ El usuario {0} solicita cancelar su turno de id {1} ---------",
                 new Object[]{emailUser, id});
         turnosSrv.cancelarReservaDeTurno(id);
+    }
+
+    @GET
+    @AdminSecured
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/filtrados")
+    public List<TurnoDTO> getTurnosParaAdministrarConFiltro(FiltroTurnos filtro) {
+        List<Turno> turnos = turnosSrv.getTurnosConFiltro(filtro);
+        List<TurnoDTO> turnosDTO = new ArrayList<>();
+        turnos.stream().map((turno) -> BeansFactory.convertirTurnoADTO(turno))
+                .forEachOrdered((turnoDTO) -> {
+                    turnosDTO.add(turnoDTO);
+                });
+        return turnosDTO;
     }
 }

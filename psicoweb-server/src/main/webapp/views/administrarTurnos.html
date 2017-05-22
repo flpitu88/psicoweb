@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" ng-init="inicializarDatos()">
     <div class="panel panel-primary panel-turnos">
         <div class="panel-heading"><h4>Informe de Turnos</h4></div>
         <div class="panel-body">
@@ -22,30 +22,28 @@
                             </p>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
+
                     <div class="row">
                         <div class="col-md-2">
                             <label for="fechaHasta">Fecha Hasta:</label>
                         </div>
                         <div class="col-md-3">
                             <p class="input-group">
-                                <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="fechaHasta" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="fechaHasta" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
                                 <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
                                 </span>
                             </p>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
+
                     <div class="row">
                         <div class="col-md-2">
                             <label for="paciente">Paciente:</label>
                         </div>
                         <div class="col-md-3">
                             <select ng-model="idPaciente">
-                                <option ng-repeat="paciente in pacientes" value="{{paciente.id}}">{{paciente.nombre + "" + paciente.apellido}}</option>
+                                <option ng-repeat="paciente in pacientes" value="{{paciente.id}}">{{paciente.nombre + " " + paciente.apellido}}</option>
                             </select>
                         </div>
                     </div>
