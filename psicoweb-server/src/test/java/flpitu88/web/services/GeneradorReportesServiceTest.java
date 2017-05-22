@@ -48,9 +48,9 @@ public class GeneradorReportesServiceTest {
     @Test
     public void generarInformeTest() throws JRException {
         FiltroTurnos filtro = new FiltroTurnos();
-        filtro.getMapa().put("fechaDesde", LocalDate.now().minusDays(5));
-        filtro.getMapa().put("fechaHasta", LocalDate.now().plusDays(2));
-        filtro.getMapa().put("paciente", 1);
+        filtro.setFechaDesde(LocalDate.now().minusDays(5));
+        filtro.setFechaHasta(LocalDate.now().plusDays(2));
+        filtro.setPaciente(1);
 
         Usuario usuario1 = new Usuario();
         usuario1.setId(1);

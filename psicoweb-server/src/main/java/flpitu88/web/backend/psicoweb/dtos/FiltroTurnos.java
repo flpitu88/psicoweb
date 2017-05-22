@@ -5,8 +5,7 @@
  */
 package flpitu88.web.backend.psicoweb.dtos;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.time.LocalDate;
 
 /**
  *
@@ -14,22 +13,41 @@ import java.util.Map;
  */
 public class FiltroTurnos {
 
-    private Map<String, Object> mapa;
+    LocalDate fechaDesde;
+    LocalDate fechaHasta;
+    Integer paciente;
 
     public FiltroTurnos() {
-        mapa = new HashMap<>();
     }
 
-    public FiltroTurnos(Map<String, Object> mapa) {
-        this.mapa = mapa;
+    public FiltroTurnos(LocalDate fechaDesde, LocalDate fechaHasta, Integer paciente) {
+        this.fechaDesde = fechaDesde;
+        this.fechaHasta = fechaHasta;
+        this.paciente = paciente;
     }
 
-    public Map<String, Object> getMapa() {
-        return mapa;
+    public LocalDate getFechaDesde() {
+        return fechaDesde;
     }
 
-    public void setMapa(Map<String, Object> mapa) {
-        this.mapa = mapa;
+    public void setFechaDesde(LocalDate fechaDesde) {
+        this.fechaDesde = fechaDesde;
+    }
+
+    public LocalDate getFechaHasta() {
+        return fechaHasta;
+    }
+
+    public void setFechaHasta(LocalDate fechaHasta) {
+        this.fechaHasta = fechaHasta;
+    }
+
+    public Integer getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Integer paciente) {
+        this.paciente = paciente;
     }
 
 }

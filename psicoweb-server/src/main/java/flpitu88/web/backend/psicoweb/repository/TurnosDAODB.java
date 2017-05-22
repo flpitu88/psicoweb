@@ -91,28 +91,23 @@ public class TurnosDAODB implements TurnosDAO {
     @Override
     public List<Turno> getTurnosConFiltro(FiltroTurnos filtro) {
         String query = "from Turno t ";
-        Map<String, Object> mapaValores = filtro.getMapa();
 
-        LocalDate fechaDesde = (LocalDate) mapaValores.get("fechaDesde");
-        LocalDate fechaHasta = (LocalDate) mapaValores.get("fechaHasta");
-        String paciente = (String) mapaValores.get("paciente");
-
-        if (fechaDesde != null || fechaHasta != null || paciente != null) {
+        if (filtro.getFechaDesde() != null || filtro.getFechaHasta() != null || filtro.getPaciente() != null) {
             query += "where ";
             int i = 0;
 
-            if (fechaDesde != null) {
+            if (filtro.getFechaDesde() != null) {
                 query += "t.dia > :fechaDesde";
                 i++;
             }
-            if (fechaHasta != null) {
+            if (filtro.getFechaHasta() != null) {
                 if (i > 0) {
                     query += " and ";
                 }
                 query += "t.dia < :fechaHasta";
                 i++;
             }
-            if (paciente != null) {
+            if (filtro.getPaciente() != null) {
                 if (i > 0) {
                     query += " and ";
                 }

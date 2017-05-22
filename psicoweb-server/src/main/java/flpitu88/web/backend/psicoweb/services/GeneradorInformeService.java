@@ -80,21 +80,20 @@ public class GeneradorInformeService implements GeneradorInformeAPI {
 
         // Armo los parámetros del informe obtenidos del filtro
         Map<String, String> parametros = new HashMap<>();
-        if (filtro.getMapa().get("fechaDesde") != null) {
+        if (filtro.getFechaDesde() != null) {
             parametros.put("fechaDesde",
                     FormatterFecha.crearStringDesdeLocalDate(
-                            (LocalDate) filtro.getMapa().get("fechaDesde")));
+                            filtro.getFechaDesde()));
         }
-        if (filtro.getMapa().get("fechaHasta") != null) {
+        if (filtro.getFechaHasta() != null) {
             parametros.put("fechaHasta",
                     FormatterFecha.crearStringDesdeLocalDate(
-                            (LocalDate) filtro.getMapa().get("fechaHasta")));
+                            filtro.getFechaHasta()));
         }
-        if (filtro.getMapa().get("paciente") != null) {
+        if (filtro.getPaciente() != null) {
             parametros.put("paciente",
                     (usuariosDAO.getUsuarioById(
-                            (Integer) filtro.getMapa().get("paciente")))
-                            .getNombreCompleto());
+                            filtro.getPaciente())).getNombreCompleto());
         }
 
         ModeloInforme modeloInforme = new ModeloInforme(parametros, listaItemsTurnos);
