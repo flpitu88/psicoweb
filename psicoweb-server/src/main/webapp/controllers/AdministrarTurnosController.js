@@ -23,14 +23,16 @@ app.controller('AdministrarTurnosController', ['$scope', '$auth', '$http', '$uib
 
         $scope.obtenerTurnos = function () {
 
-            var filtroInforme = '{"mapa":{'
-                    + '"fechaDesde": '
-                    + $scope.fechaDesde + ',"fechaHasta": '
-                    + $scope.fechaHasta + ',"paciente": '
-                    + $scope.idPaciente + '}';
+            var filtroInforme = {
+                fechaDesde: $scope.fechaDesde,
+                fechaHasta: $scope.fechaHasta,
+                paciente: $scope.idPaciente
+            }
 
             console.log('Entre a obtener turnos');
-            console.log('filtroInforme vale: ' + filtroInforme);
+            console.log('fechaDesde vale: ' + filtroInforme.fechaDesde);
+            console.log('fechaHasta vale: ' + filtroInforme.fechaHasta);
+            console.log('paciente vale: ' + filtroInforme.paciente);
 
             $http({
                 method: 'GET',
@@ -54,7 +56,7 @@ app.controller('AdministrarTurnosController', ['$scope', '$auth', '$http', '$uib
         $scope.dateOptions = {
             dateDisabled: disabled,
             formatYear: 'yyyy',
-            maxDate: new Date(2020, 5, 22),
+            maxDate: new Date(),
             minDate: new Date(),
             startingDay: 1
         };
