@@ -140,7 +140,7 @@ public class TurnosResource {
         turnosSrv.cancelarReservaDeTurno(id);
     }
 
-    @GET
+    @PUT
     @AdminSecured
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/filtrados")

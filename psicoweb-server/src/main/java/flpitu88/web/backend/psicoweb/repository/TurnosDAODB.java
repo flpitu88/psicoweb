@@ -8,6 +8,7 @@ package flpitu88.web.backend.psicoweb.repository;
 import flpitu88.web.backend.psicoweb.dtos.FiltroTurnos;
 import flpitu88.web.backend.psicoweb.model.Turno;
 import flpitu88.web.backend.psicoweb.model.Usuario;
+import flpitu88.web.backend.psicoweb.utils.FormatterFecha;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -118,6 +119,9 @@ public class TurnosDAODB implements TurnosDAO {
         query += " order by t.id";
 
         return sessionFactory.getCurrentSession().createQuery(query)
+                .setParameter("fechaDesde", FormatterFecha.crearFechaNacimientoDesdeString(filtro.getFechaDesde()))
+                .setParameter("fechaHasta", FormatterFecha.crearFechaNacimientoDesdeString(filtro.getFechaHasta()))
+                .setParameter("paciente", filtro.getPaciente())
                 .list();
     }
 }

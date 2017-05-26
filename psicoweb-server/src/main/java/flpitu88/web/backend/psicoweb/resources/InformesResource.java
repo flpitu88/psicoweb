@@ -14,7 +14,8 @@ import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
-import javax.ws.rs.GET;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
@@ -46,9 +47,10 @@ public class InformesResource {
         this.proveedorSrv = proveedorSrv;
     }
 
-    @GET
+    @PUT
     @AdminSecured
     @Produces("application/pdf")
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response obtenerInformeConFiltro(FiltroTurnos filtro) {
         String username = proveedorSrv.getEmailUsuario();
         logger.log(Level.INFO, "############## El usuario {0} solicita un informe de turnos ##############", username);
@@ -59,7 +61,9 @@ public class InformesResource {
 
                     byte[] datos = null;
                     try {
-                        datos = Base64.getDecoder().decode(generadorInformesSrv.generarInformeDeTurnosPDF(filtro));
+                        String pdfBase64 = Base64.getEncoder().encodeToString(
+                                generadorInformesSrv.generarInformeDeTurnosPDF(filtro));
+                        datos = Base64.getDecoder().decode(pdfBase64);
                     } catch (JRException ex) {
                         Logger.getLogger(InformesResource.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -69,7 +73,7 @@ public class InformesResource {
             };
             return Response
                     .ok(fileStream, MediaType.APPLICATION_OCTET_STREAM)
-                    .header("content-disposition", "attachment; filename = factura.pdf")
+                    .header("content-disposition", "attachment; filename = informeTurnos.pdf")
                     .build();
         } catch (Exception ex) {
             logger.severe("############## Error al generar informe ##############");

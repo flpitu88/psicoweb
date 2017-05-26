@@ -12,6 +12,7 @@ import flpitu88.web.backend.psicoweb.model.Usuario;
 import flpitu88.web.backend.psicoweb.repository.TurnosDAO;
 import flpitu88.web.backend.psicoweb.repository.UsuariosDAO;
 import flpitu88.web.backend.psicoweb.services.GeneradorInformeService;
+import flpitu88.web.backend.psicoweb.utils.FormatterFecha;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
@@ -48,8 +49,12 @@ public class GeneradorReportesServiceTest {
     @Test
     public void generarInformeTest() throws JRException {
         FiltroTurnos filtro = new FiltroTurnos();
-        filtro.setFechaDesde(LocalDate.now().minusDays(5));
-        filtro.setFechaHasta(LocalDate.now().plusDays(2));
+        filtro.setFechaDesde(
+                FormatterFecha
+                        .crearStringDesdeLocalDate(LocalDate.now().minusDays(5)));
+        filtro.setFechaHasta(
+                FormatterFecha.crearStringDesdeLocalDate(
+                        LocalDate.now().plusDays(2)));
         filtro.setPaciente(1);
 
         Usuario usuario1 = new Usuario();

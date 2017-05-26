@@ -214,6 +214,7 @@ public class TurnosService implements TurnosAPI {
     }
 
     @Override
+    @Transactional(readOnly = false)
     public List<Turno> getTurnosConFiltro(FiltroTurnos filtro) {
         return turnosDAO.getTurnosConFiltro(filtro);
     }

@@ -5,40 +5,38 @@
  */
 package flpitu88.web.backend.psicoweb.dtos;
 
-import java.time.LocalDate;
-
 /**
  *
  * @author flpitu88
  */
 public class FiltroTurnos {
 
-    LocalDate fechaDesde;
-    LocalDate fechaHasta;
+    String fechaDesde;
+    String fechaHasta;
     Integer paciente;
 
     public FiltroTurnos() {
     }
 
-    public FiltroTurnos(LocalDate fechaDesde, LocalDate fechaHasta, Integer paciente) {
+    public FiltroTurnos(String fechaDesde, String fechaHasta, Integer paciente) {
         this.fechaDesde = fechaDesde;
         this.fechaHasta = fechaHasta;
         this.paciente = paciente;
     }
 
-    public LocalDate getFechaDesde() {
+    public String getFechaDesde() {
         return fechaDesde;
     }
 
-    public void setFechaDesde(LocalDate fechaDesde) {
+    public void setFechaDesde(String fechaDesde) {
         this.fechaDesde = fechaDesde;
     }
 
-    public LocalDate getFechaHasta() {
+    public String getFechaHasta() {
         return fechaHasta;
     }
 
-    public void setFechaHasta(LocalDate fechaHasta) {
+    public void setFechaHasta(String fechaHasta) {
         this.fechaHasta = fechaHasta;
     }
 

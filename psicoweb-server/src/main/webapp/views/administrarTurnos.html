@@ -57,4 +57,26 @@
             </div>
         </div>
     </div>
+    <div class="panel panel-primary panel-turnos">
+        <div class="panel-body">
+            <table class="table table-striped">
+                <tr class="text-center" style="font-weight: bold; background-color: lightblue">
+                    <td>Dia</td>
+                    <td>Hora</td>
+                    <td>Motivo</td>
+                    <td></td>
+                </tr>
+                <tr ng-repeat="turno in turnos" ng-model="turno.id">
+                    <td class="text-center">{{ turno.dia }}</td>
+                    <td class="text-center">{{ turno.hora }}</td>
+                    <td>{{ turno.motivo.motivo }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="panel panel-primary panel-footer">
+            <div class="btn-group-horizontal botonera pull-right">
+                <button type="button" class="btn btn-info" ng-click="generarInforme()">Generar PDF</button>
+            </div>
+        </div>
+    </div>
 </div>

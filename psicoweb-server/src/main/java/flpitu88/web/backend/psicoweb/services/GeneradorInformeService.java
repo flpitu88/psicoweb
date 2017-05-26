@@ -14,7 +14,6 @@ import flpitu88.web.backend.psicoweb.repository.UsuariosDAO;
 import flpitu88.web.backend.psicoweb.serviceapis.GeneradorInformeAPI;
 import flpitu88.web.backend.psicoweb.utils.FormatterFecha;
 import flpitu88.web.backend.psicoweb.utils.FormatterHora;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -82,13 +81,11 @@ public class GeneradorInformeService implements GeneradorInformeAPI {
         Map<String, String> parametros = new HashMap<>();
         if (filtro.getFechaDesde() != null) {
             parametros.put("fechaDesde",
-                    FormatterFecha.crearStringDesdeLocalDate(
-                            filtro.getFechaDesde()));
+                    filtro.getFechaDesde());
         }
         if (filtro.getFechaHasta() != null) {
             parametros.put("fechaHasta",
-                    FormatterFecha.crearStringDesdeLocalDate(
-                            filtro.getFechaHasta()));
+                    filtro.getFechaHasta());
         }
         if (filtro.getPaciente() != null) {
             parametros.put("paciente",
