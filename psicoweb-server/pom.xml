@@ -23,6 +23,7 @@
         <jacoco.version>0.7.7.201606060606</jacoco.version>
         <jasper.version>6.2.2</jasper.version>
         <jackson.version>2.8.7</jackson.version>
+        <apachecommons.version>1.3.2</apachecommons.version>
     </properties>
     
     <dependencies>
@@ -204,6 +205,12 @@
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports</artifactId>
             <version>${jasper.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-io -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${apachecommons.version}</version>
         </dependency>
     </dependencies>
     

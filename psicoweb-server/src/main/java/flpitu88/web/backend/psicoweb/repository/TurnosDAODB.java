@@ -12,6 +12,7 @@ import flpitu88.web.backend.psicoweb.utils.FormatterFecha;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -118,10 +119,19 @@ public class TurnosDAODB implements TurnosDAO {
 
         query += " order by t.id";
 
-        return sessionFactory.getCurrentSession().createQuery(query)
-                .setParameter("fechaDesde", FormatterFecha.crearFechaNacimientoDesdeString(filtro.getFechaDesde()))
-                .setParameter("fechaHasta", FormatterFecha.crearFechaNacimientoDesdeString(filtro.getFechaHasta()))
-                .setParameter("paciente", filtro.getPaciente())
-                .list();
+        Query q = sessionFactory.getCurrentSession().createQuery(query);
+        if (filtro.getFechaDesde() != null) {
+            q.setParameter(
+                    "fechaDesde",
+                    FormatterFecha.crearFechaNacimientoDesdeString(filtro.getFechaDesde()));
+        }
+        if (filtro.getFechaHasta() != null) {
+            q.setParameter("fechaHasta", FormatterFecha.crearFechaNacimientoDesdeString(filtro.getFechaHasta()));
+        }
+        if (filtro.getPaciente() != null) {
+            q.setParameter("paciente", filtro.getPaciente());
+        }
+
+        return q.list();
     }
 }

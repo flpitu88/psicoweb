@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('myApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'angular-md5', 'satellizer']);
+var app = angular.module('myApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'angular-md5', 'satellizer', 'base64']);
 
 // Declare app level module which depends on views, and components
 app.config(['$locationProvider', '$routeProvider', '$authProvider', function ($locationProvider, $routeProvider, $authProvider) {

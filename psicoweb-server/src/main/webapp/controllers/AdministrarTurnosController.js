@@ -1,6 +1,6 @@
 app.controller('AdministrarTurnosController',
-        ['$scope', '$http', 'FileSaver', 'Blob',
-            function ($scope, $http, FileSaver, Blob) {
+        ['$scope', '$http', '$base64',
+            function ($scope, $http, $base64) {
 
                 var urlTurnos = '/psicoweb-server/rest/turnos/filtrados';
                 var urlInformes = '/psicoweb-server/rest/informes';
@@ -22,6 +22,27 @@ app.controller('AdministrarTurnosController',
                     }).catch(function (response) {
                         console.log(response.status + ': Error en el pedido de pacientes');
                     });
+                }
+
+                function base64ABlob(b64String) {
+                    var byteCharacters = atob(b64String);
+                    var byteArrays = [];
+
+                    for (var offset = 0; offset < byteCharacters.length; offset += 512) {
+                        var slice = byteCharacters.slice(offset, offset + 512);
+
+                        var byteNumbers = new Array(slice.length);
+                        for (var i = 0; i < slice.length; i++) {
+                            byteNumbers[i] = slice.charCodeAt(i);
+                        }
+
+                        var byteArray = new Uint8Array(byteNumbers);
+
+                        byteArrays.push(byteArray);
+                    }
+
+                    var blob = new Blob(byteArrays, {type: 'application/pdf'});
+                    return blob;
                 }
 
                 $scope.obtenerTurnos = function () {
@@ -48,6 +69,7 @@ app.controller('AdministrarTurnosController',
                     }).then(function (response) {
                         console.log('Recibi los turnos filtrados');
                         $scope.turnos = response.data;
+                        console.log('$scope.turnos vale: ' + $scope.turnos);
                     }).catch(function (response) {
                         console.log(response.status + ': Error en el pedido de pacientes');
                     });
@@ -66,12 +88,23 @@ app.controller('AdministrarTurnosController',
                         data: filtroInforme,
                         headers: {
                             'Content-Type': 'application/json',
-                            'Accept': 'application/pdf'
+                            'Accept': 'text/plain'
                         }
                     }).then(function (response) {
                         console.log('Recibi el pdf solicitado');
-                        var blob = new Blob([response.data], {type: 'application/pdf'});
-                        FileSaver.saveAs(blob, "informeTurnos.pdf");
+                        var contentType = 'application/pdf';
+                        var urlCreator = window.URL || window.webkitURL || window.mozURL || window.msURL;
+                        if (urlCreator) {
+                            var blob = base64ABlob(response.data);
+                            var url = urlCreator.createObjectURL(blob);
+                            var a = document.createElement("a");
+                            document.body.appendChild(a);
+                            a.style = "display: none";
+                            a.href = url;
+                            a.download = "informeTurnos.pdf"; //you may assign this value from header as well 
+                            a.click();
+                            window.URL.revokeObjectURL(url);
+                        }
                     }).catch(function (response) {
                         console.log(response.status + ': Error al recibir el informe de turnos');
                     });

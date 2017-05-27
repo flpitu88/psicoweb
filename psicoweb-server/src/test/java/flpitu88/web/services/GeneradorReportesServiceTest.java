@@ -80,7 +80,7 @@ public class GeneradorReportesServiceTest {
         when(usuariosDAO.getUsuarioById(eq(2)))
                 .thenReturn(usuario2);
 
-        byte[] informe = generadorReporteService.generarInformeDeTurnosPDF(filtro);
+        String informe = generadorReporteService.generarInformeDeTurnosPDF(filtro);
 
         Assert.assertNotNull(informe);
     }

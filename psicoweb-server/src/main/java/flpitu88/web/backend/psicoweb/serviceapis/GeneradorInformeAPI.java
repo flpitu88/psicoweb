@@ -14,5 +14,5 @@ import net.sf.jasperreports.engine.JRException;
  */
 public interface GeneradorInformeAPI {
 
-    public byte[] generarInformeDeTurnosPDF(FiltroTurnos filtro) throws JRException;
+    public String generarInformeDeTurnosPDF(FiltroTurnos filtro) throws JRException;
 }
