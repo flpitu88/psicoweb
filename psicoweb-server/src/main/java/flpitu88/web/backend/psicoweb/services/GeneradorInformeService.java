@@ -68,7 +68,7 @@ public class GeneradorInformeService implements GeneradorInformeAPI {
                 report, modeloInforme.getParametros(),
                 new JRBeanCollectionDataSource(modeloInforme.getItems()));
         String pathFileTemp = env.getProperty("pathTemp") + "informeTurnos.pdf";
-//        JasperExportManager.exportReportToPdfFile(print, pathFileTemp);
+        JasperExportManager.exportReportToPdfFile(print, pathFileTemp);
         try {
             File archivoPdf = new File(pathFileTemp);
             byte[] content = cargarArchivo(archivoPdf);
